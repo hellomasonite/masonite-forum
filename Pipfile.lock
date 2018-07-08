@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "97a7bd35fc4a1f2276622135194839042d195966479c42a8c300bfde0c3f6ef9"
+            "sha256": "3ebf5b4ac93412334dc3ea22cfa315f71574707053b8222b241e506af3589c8f"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -137,7 +137,6 @@
                 "sha256:edabd457cd23a02965166026fd9bfd196f4324fe6032e866d0f3bd0301cd486f",
                 "sha256:fdf1c1dc5bafc32bc5d08b054f94d659422b05aba244d6be4ddc1c72d9aa70fb"
             ],
-            "markers": "platform_python_implementation != 'pypy'",
             "version": "==1.11.5"
         },
         "chardet": {
@@ -149,10 +148,10 @@
         },
         "cleo": {
             "hashes": [
-                "sha256:85a63076b72ca376fb06668be1fc7758dc16740b394783d5cc65200c4b32f71b",
-                "sha256:9b7f79f1aa470a025c0d28c76aa225ee9e65028d32f80032e871aa3500df61b8"
+                "sha256:4522ed4c3342cea9f34bf7b787295d962651dcec90735c56d469790339a25805",
+                "sha256:cd6e0588ffe148072476b9e4d73ea1c944c2dd86fcc75ba133bc7797dc26c618"
             ],
-            "version": "==0.6.8"
+            "version": "==0.6.5"
         },
         "cryptography": {
             "hashes": [
@@ -259,6 +258,13 @@
             ],
             "index": "pypi",
             "version": "==2.0.9"
+        },
+        "masonite-cli": {
+            "hashes": [
+                "sha256:fb19bb310c24b338162ae9a77596c2d32ab243b1dc6f1acb103a59c9d0c74e85"
+            ],
+            "index": "pypi",
+            "version": "==2.0.10"
         },
         "masonite-entry": {
             "hashes": [
