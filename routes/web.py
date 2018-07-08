@@ -3,17 +3,21 @@ from masonite.helpers.routes import get, post, group
 
 ROUTES = [
     get('/', 'HomeController@index').name('welcome'),
-    get('/login', 'LoginController@show'),
-    get('/logout', 'LoginController@logout').middleware('auth'),
+    get('/login', 'LoginController@show').name('login'),
     post('/login', 'LoginController@store'),
     get('/register', 'RegisterController@show'),
     post('/register', 'RegisterController@store'),
-    get('/ask', 'QuestionController@create').middleware('auth'),
-    post('/questions', 'QuestionController@store').middleware('auth'),
     get('/questions/@id', 'QuestionController@show'),
-    post('/questions/@id/answers', 'AnswerController@store').middleware('auth'),
-    get('/questions/@id/upvote', 'QuestionController@upvote').middleware('auth'),
-    get('/questions/@id/downvote', 'QuestionController@downvote').middleware('auth'),
+
+    # auth middleware
+    get('/logout', 'LoginController@logout').middleware('auth'),
+    get('/ask', 'QuestionController@create').middleware('auth'),
+    group('/questions', [
+        post('', 'QuestionController@store').middleware('auth'),
+        post('/@id/answers', 'AnswerController@store').middleware('auth'),
+        get('/@id/upvote', 'QuestionController@upvote').middleware('auth'),
+        get('/@id/downvote', 'QuestionController@downvote').middleware('auth'),
+    ]),
     get('/me/questions', 'QuestionController@questions').middleware('auth'),
     get('/me/answers', 'AnswerController@answers').middleware('auth'),
 ]
