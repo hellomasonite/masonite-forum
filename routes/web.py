@@ -1,6 +1,11 @@
 ''' Web Routes '''
-from masonite.routes import Get, Post
+from masonite.helpers.routes import get, post
 
 ROUTES = [
-    Get().route('/', 'WelcomeController@show').name('welcome'),
+    get('/', 'HomeController@index').name('welcome'),
+    get('/login', 'LoginController@show'),
+    get('/logout', 'LoginController@logout'),
+    post('/login', 'LoginController@store'),
+    get('/register', 'RegisterController@show'),
+    post('/register', 'RegisterController@store'),
 ]
