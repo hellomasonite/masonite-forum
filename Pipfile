@@ -8,6 +8,7 @@ gunicorn = "*"
 masonite = "*"
 masonite-cli = "*"
 "psycopg2-binary" = "*"
+"psycopg2" = "*"
 
 [dev-packages]
 
