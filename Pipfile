@@ -7,6 +7,7 @@ name = "pypi"
 gunicorn = "*"
 masonite = "*"
 masonite-cli = "*"
+"psycopg2" = "*"
 
 [dev-packages]
 
