@@ -1,0 +1,24 @@
+{% extends 'layouts/app.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-4">
+                <h4>Ask Question!</h4>
+                <br>
+                <form action="/questions" method="POST">
+                    {{ csrf_field|safe }}
+                    <div class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" class="form-control" id="title" name="title" placeholder="Enter title">
+                    </div>
+                    <div class="form-group">
+                        <label for="body">Description</label>
+                        <textarea name="body" id="body" class="form-control" cols="30" rows="5"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-block">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

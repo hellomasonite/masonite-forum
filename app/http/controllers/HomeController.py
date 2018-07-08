@@ -1,5 +1,6 @@
 ''' A Module Description '''
 from masonite.facades.Auth import Auth
+from app.Question import Question
 
 class HomeController(object):
     ''' Home Dashboard Controller '''
@@ -8,4 +9,5 @@ class HomeController(object):
         pass
     
     def index(self):
-        return view('index')
+        questions = Question.all()
+        return view('index', {'questions': questions})

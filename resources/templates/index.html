@@ -6,7 +6,7 @@
         <div class="col-md-3">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Active</a>
+                    <a class="nav-link active" href="#">Top questions</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Link</a>
@@ -20,26 +20,27 @@
             </ul>
         </div>
         <div class="col-md-9">
-            <div class="row">
-                <div class="col">
-                    <div class="card border-light mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Light card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            {% for question in questions %}
+                <div class="row">
+                    <div class="col">
+                        <div class="card border-light mb-3">
+                            <div class="card-body">
+                                <h5 class="card-title"><a href="">{{ question.title }}</a></h5>
+                                <p class="card-text"> {{ question.body|truncate(100) }} </p>
+                                <p><a href="">Read more</a></p>
+                                <footer class="blockquote-footer">asked by {{ question.user.name }} at <cite title="Source Title"> {{ question.created_at.strftime('%B %d, %Y %I:%M:%S') }} </cite></footer>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="card border-light mb-3">
-                        <div class="card-body">
-                            <h5 class="card-title">Light card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
+            {% else %}
+                <div class="card text-center">
+                    <div class="card-body">
+                        <h5 class="card-title">No questions found</h5>
+                        <a href="/ask" class="btn btn-primary">Ask question!</a>
                     </div>
                 </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>
