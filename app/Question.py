@@ -1,6 +1,7 @@
 ''' A Question Database Model '''
 from config.database import Model
-from orator.orm import belongs_to
+from orator.orm import belongs_to, has_many
+from app.Answer import Answer
 
 class Question(Model):
     __fillable__ = ['title', 'user_id', 'body']
@@ -10,3 +11,8 @@ class Question(Model):
     def user(self):
         from app.User import User
         return User
+    
+    @has_many
+    def answers(self):
+        return Answer
+    

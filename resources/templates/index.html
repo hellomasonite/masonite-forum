@@ -3,32 +3,17 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-md-3">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                    <a class="nav-link active" href="#">Top questions</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Link</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link disabled" href="#">Disabled</a>
-                </li>
-            </ul>
-        </div>
+        {% include('layouts/sidebar.html') %}
         <div class="col-md-9">
             {% for question in questions %}
                 <div class="row">
                     <div class="col">
                         <div class="card border-light mb-3">
                             <div class="card-body">
-                                <h5 class="card-title"><a href="">{{ question.title }}</a></h5>
+                                <h5 class="card-title"><a href="/questions/{{ question.id }}">{{ question.title }}</a></h5>
                                 <p class="card-text"> {{ question.body|truncate(100) }} </p>
-                                <p><a href="">Read more</a></p>
-                                <footer class="blockquote-footer">asked by {{ question.user.name }} at <cite title="Source Title"> {{ question.created_at.strftime('%B %d, %Y %I:%M:%S') }} </cite></footer>
+                                <p><a href="/questions/{{ question.id }}">Read more</a></p>
+                                <footer class="blockquote-footer">asked by {{ question.user.name }}, <cite title="Source Title"> {{ question.created_at.strftime('%B %d - %I:%M:%S') }} </cite></footer>
                             </div>
                         </div>
                     </div>

@@ -6,8 +6,9 @@ from app.Question import Question
 class QuestionController:
     ''' Class Docstring Description '''
 
-    def show(self):
-        pass
+    def show(self, Request):
+        question = Question.find(Request.param('id'))
+        return view('questions/show', {'question': question})
 
     def index(self):
         pass

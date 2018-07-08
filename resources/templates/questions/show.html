@@ -1,0 +1,47 @@
+{% extends 'layouts/app.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            {% include('layouts/sidebar.html') %}
+            <div class="col-md-9">
+                <p><a href="/" class="btn btn-primary">Back to questions</a></p>
+                <div class="card border-light mb-3">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ question.title }}</h5>
+                        <p class="card-text"> {{ question.body }} </p>
+                        <footer class="blockquote-footer">asked by {{ question.user.name }}, <cite title="Source Title"> {{ question.created_at.strftime('%B %d - %I:%M:%S') }} </cite></footer>
+                    </div>
+                </div>
+                {% if question.answers|length >0 %}
+                    <p> {% if question.answers|length == 1 %} 1 Answer {% else %} {{ question.answers|length }} Answers {% endif %}</p>
+                {% endif %}
+                <div>
+                    {% for answer in question.answers %}
+                        <div class="media mb-4">
+                            <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
+                            <div class="media-body">
+                                <h5 class="mt-0"> {{ answer.user.name }} </h5>
+                                {{ answer.body }}
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="card text-center">
+                            <div class="card-body">
+                                <h5 class="card-title">No answers yet.</h5>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <form action="/questions/{{ question.id }}/answers" method="POST">
+                    {{ csrf_field|safe }}
+                    <div class="form-group">
+                        <label for="body"><b>Your Answer</b></label>
+                        <textarea name="body" id="body" class="form-control" cols="30" rows="5"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
