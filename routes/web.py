@@ -12,6 +12,8 @@ ROUTES = [
     post('/questions', 'QuestionController@store').middleware('auth'),
     get('/questions/@id', 'QuestionController@show'),
     post('/questions/@id/answers', 'AnswerController@store').middleware('auth'),
+    get('/questions/@id/upvote', 'QuestionController@upvote').middleware('auth'),
+    get('/questions/@id/downvote', 'QuestionController@downvote').middleware('auth'),
     get('/me/questions', 'QuestionController@questions').middleware('auth'),
     get('/me/answers', 'AnswerController@answers').middleware('auth'),
 ]

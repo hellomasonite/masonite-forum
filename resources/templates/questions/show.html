@@ -9,6 +9,11 @@
                 <div class="card border-light mb-3">
                     <div class="card-body">
                         <h5 class="card-title">{{ question.title }}</h5>
+                        <div class="btn-group" role="group" aria-label="Basic example">
+                            <a class="btn" href="/questions/{{ question.id }}/upvote"><i class="far fa-thumbs-up"></i></a>
+                            <a class="btn"> <span class="badge badge-primary"> {{ question.votes(question.id) }} </span> </a>
+                            <a class="btn" href="/questions/{{ question.id }}/downvote"><i class="far fa-thumbs-down"></i></a>
+                        </div>
                         <p class="card-text"> {{ question.body }} </p>
                         <footer class="blockquote-footer">asked by {{ question.user.name }}, <cite title="Source Title"> {{ question.created_at.strftime('%B %d - %I:%M:%S') }} </cite></footer>
                     </div>

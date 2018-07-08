@@ -2,6 +2,7 @@
 from validator import Required, Not, Blank, validate, Length
 from app.User import User
 from app.Question import Question
+from app.Vote import Vote
 
 class QuestionController:
     ''' Class Docstring Description '''
@@ -38,11 +39,44 @@ class QuestionController:
         questions = Question.where('user_id', Request.user().id).get()
         return view('questions/me', {'questions': questions})
 
-    def update(self):
-        pass
+    def upvote(self, Request, Session):
+        id = Request.param('id')
+        votes = Vote.where('question_id', id).where('user_id', Request.user().id).get()
+        if votes.count() > 0:
+            vote = votes.last()
+            vote.value += 1
+            if vote.value > 1:
+                Session.flash('warning', 'Question already voted!')
+            else:
+                vote.save()
+            return Request.redirect('/questions/@id', {'id': id})
 
-    def destroy(self):
-        pass
+        Vote.create(
+            value=1,
+            question_id=id,
+            user_id=Request.user().id
+        )
+        return Request.redirect('/questions/@id', {'id': id})
+
+    def downvote(self, Request, Session):
+        id = Request.param('id')
+        votes = Vote.where('question_id', id).where('user_id', Request.user().id).get()
+        if votes.count() > 0:
+            vote = votes.last()
+            if vote.value == 1 or vote.value == 0:
+                vote.value -= 1
+                vote.save()
+                return Request.redirect('/questions/@id', {'id': id})
+            else:
+                Session.flash('warning', 'Question already downvoted!')
+                return Request.redirect('/questions/@id', {'id': id})
+                
+        Vote.create(
+            value=1,
+            question_id=id,
+            user_id=Request.user().id
+        )
+        return Request.redirect('/questions/@id', {'id': id})
 
     def validate_input(self, data):
         rules = {
