@@ -34,8 +34,9 @@ class QuestionController:
         Session.flash('success', 'Question added successfuly!')
         return Request.redirect('/')
 
-    def edit(self):
-        pass
+    def questions(self, Request):
+        questions = Question.where('user_id', Request.user().id).get()
+        return view('questions/me', {'questions': questions})
 
     def update(self):
         pass

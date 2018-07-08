@@ -10,6 +10,8 @@ ROUTES = [
     post('/register', 'RegisterController@store'),
     get('/ask', 'QuestionController@create').middleware('auth'),
     post('/questions', 'QuestionController@store').middleware('auth'),
-    get('/questions/@id', 'QuestionController@show').middleware('auth'),
+    get('/questions/@id', 'QuestionController@show'),
     post('/questions/@id/answers', 'AnswerController@store').middleware('auth'),
+    get('/me/questions', 'QuestionController@questions').middleware('auth'),
+    get('/me/answers', 'AnswerController@answers').middleware('auth'),
 ]

@@ -23,6 +23,10 @@ class AnswerController:
         )
         Session.flash('success', 'Answer added successfuly!')
         return Request.redirect('/questions/@id', {'id': id})
+    
+    def answers(self, Request):
+        answers = Answer.where('user_id', Request.user().id).get()
+        return view('answers/me', {'answers': answers})
 
     def validate_input(self, data):
         rules = {

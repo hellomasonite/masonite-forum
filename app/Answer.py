@@ -11,3 +11,8 @@ class Answer(Model):
     def user(self):
         from app.User import User
         return User
+    
+    @belongs_to('question_id', 'id')
+    def question(self):
+        from app.Question import Question
+        return Question
