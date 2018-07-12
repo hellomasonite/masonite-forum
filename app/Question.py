@@ -5,7 +5,7 @@ from app.Answer import Answer
 from app.Vote import Vote
 
 class Question(Model):
-    __fillable__ = ['title', 'user_id', 'body']
+    __fillable__ = ['title', 'user_id', 'body', 'tags']
     __table__ = 'questions'
 
     @belongs_to('user_id', 'id')
@@ -25,4 +25,7 @@ class Question(Model):
             return votes.last().value
         
         return 0
+    
+    def get_tags(self):
+        return self.tags.split(',')
     
