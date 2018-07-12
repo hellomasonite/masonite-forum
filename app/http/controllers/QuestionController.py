@@ -18,6 +18,7 @@ class QuestionController:
         return view('questions/new')
 
     def store(self, Request, Session):
+        tags = Request.input('tags')
         validate = QuestionValidator(Request).validate_new_form()
 
         if not validate.check():
@@ -30,7 +31,8 @@ class QuestionController:
         Question.create(
             title=Request.input('title'),
             body=Request.input('body'),
-            user_id=Request.user().id
+            user_id=Request.user().id,
+            tags=tags
         )
         Session.flash('success', 'Question added successfuly!')
         return Request.redirect('/')
