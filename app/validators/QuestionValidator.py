@@ -8,5 +8,5 @@ class QuestionValidator(Validator):
         return self.validate({
             'title': [Required, Not(Blank())],
             'body': [Required, Not(Blank())],
-            'tags': [Required, Length(2, maximum=4)],
+            'tags': [Required, Length(1, maximum=5)],
         })
