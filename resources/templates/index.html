@@ -20,7 +20,18 @@
                                 </div>
                                 <p class="card-text"> {{ question.body|truncate(100) }} </p>
                                 <p><a href="{{ route('question', {'id': question.id}) }}">Read more</a></p>
+                                <p class="text-muted">
+                                    tags: 
+                                    {% for tag in question.get_tags() %} 
+                                        {% if tag %}
+                                            <span class="badge badge-primary">
+                                                #{{ tag }}
+                                            </span> 
+                                        {% endif %} 
+                                    {% endfor %}
+                                </p>
                                 <footer class="blockquote-footer">asked by {{ question.user.name }}, <cite> {{ question.created_at.strftime('%B %d - %I:%M:%S') }} </cite></footer>
+                                
                             </div>
                         </div>
                     </div>

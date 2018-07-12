@@ -32,8 +32,9 @@ class QuestionController:
             title=Request.input('title'),
             body=Request.input('body'),
             user_id=Request.user().id,
-            tags=tags
+            tags=self.clean_tags(tags)
         )
+
         Session.flash('success', 'Question added successfuly!')
         return Request.redirect('/')
 
@@ -79,3 +80,6 @@ class QuestionController:
             user_id=Request.user().id
         )
         return Request.redirect('/questions/@id', {'id': id})
+
+    def clean_tags(self, tags):
+        return ','.join(map(lambda tag: tag.strip().lower(), tags.split(',')))

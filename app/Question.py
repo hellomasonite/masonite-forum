@@ -26,3 +26,6 @@ class Question(Model):
         
         return 0
     
+    def get_tags(self):
+        return self.tags.split(',')
+    
