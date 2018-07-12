@@ -1,8 +1,8 @@
 ''' A Module Description '''
-from validator import Required, Not, Blank, validate, Length
 from app.User import User
 from app.Question import Question
 from app.Vote import Vote
+from app.validators.QuestionValidator import QuestionValidator
 
 class QuestionController:
     ''' Class Docstring Description '''
@@ -18,12 +18,12 @@ class QuestionController:
         return view('questions/new')
 
     def store(self, Request, Session):
-        ok, errors = self.validate_input(Request.all())
+        validate = QuestionValidator(Request).validate_new_form()
 
-        if not ok:
+        if not validate.check():
             display = ''
-            for error in errors:
-                display += '{0} {1} \n\n\n'.format(error.title(), errors[error][0])
+            for error in validate.errors():
+                display += '{0} {1} \n\n\n'.format(error.title(), validate.errors()[error][0])
             Session.flash('danger', display)
             return Request.redirect('/ask')
         
@@ -77,11 +77,3 @@ class QuestionController:
             user_id=Request.user().id
         )
         return Request.redirect('/questions/@id', {'id': id})
-
-    def validate_input(self, data):
-        rules = {
-            'title': [Required, Not(Blank())],
-            'body': [Required, Not(Blank())]
-        }
-
-        return validate(rules, data)
