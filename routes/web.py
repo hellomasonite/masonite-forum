@@ -1,5 +1,6 @@
 ''' Web Routes '''
 from masonite.helpers.routes import get, post, group
+from masonite.routes import RouteGroup
 
 ROUTES = [
     get('/', 'HomeController@index').name('welcome'),
@@ -9,15 +10,23 @@ ROUTES = [
     post('/register', 'RegisterController@store'),
     get('/questions/@id', 'QuestionController@show'),
 
-    # auth middleware
-    get('/logout', 'LoginController@logout').middleware('auth'),
-    get('/ask', 'QuestionController@create').middleware('auth'),
-    group('/questions', [
-        post('', 'QuestionController@store').middleware('auth'),
-        post('/@id/answers', 'AnswerController@store').middleware('auth'),
-        get('/@id/upvote', 'QuestionController@upvote').middleware('auth'),
-        get('/@id/downvote', 'QuestionController@downvote').middleware('auth'),
-    ]),
-    get('/me/questions', 'QuestionController@questions').middleware('auth'),
-    get('/me/answers', 'AnswerController@answers').middleware('auth'),
+
+    RouteGroup([
+        get('/logout', 'LoginController@logout'),
+        get('/ask', 'QuestionController@create').name('ask'),
+
+        # Question Routes
+        RouteGroup([
+            post('', 'QuestionController@store').name('list'),
+            post('/@id/answers', 'AnswerController@store').name('answers'),
+            get('/@id/upvote', 'QuestionController@upvote').name('upvote'),
+            get('/@id/downvote', 'QuestionController@downvote').name('downvote'),
+        ], prefix='/questions', name='question.'),
+
+        # Me Routes
+        RouteGroup([
+            get('/questions', 'QuestionController@questions').name('questions'),
+            get('/answers', 'AnswerController@answers').name('answers'),
+        ], prefix='/me', name='me.')
+    ], middleware = ('auth',)),
 ]
