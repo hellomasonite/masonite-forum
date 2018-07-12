@@ -8,7 +8,7 @@ ROUTES = [
     post('/login', 'LoginController@store'),
     get('/register', 'RegisterController@show'),
     post('/register', 'RegisterController@store'),
-    get('/questions/@id', 'QuestionController@show'),
+    get('/questions/@id', 'QuestionController@show').name('question'),
 
 
     RouteGroup([

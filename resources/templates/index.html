@@ -11,15 +11,15 @@
                         <div class="card border-light mb-3">
                             <div class="card-body">
                                 <h5 class="card-title">
-                                    <a href="/questions/{{ question.id }}">{{ question.title }}</a>
+                                    <a href="{{ route('question', {'id': question.id}) }}">{{ question.title }}</a>
                                 </h5>
                                 <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a class="btn" href="/questions/{{ question.id }}/upvote"><i class="far fa-thumbs-up"></i></a>
+                                    <a class="btn" href="{{ route('question.upvote', {'id': question.id}) }}"><i class="far fa-thumbs-up"></i></a>
                                     <a class="btn"> <span class="badge badge-primary"> {{ question.votes(question.id) }} </span> </a>
-                                    <a class="btn" href="/questions/{{ question.id }}/downvote"><i class="far fa-thumbs-down"></i></a>
+                                    <a class="btn" href="{{ route('question.downvote', {'id': question.id}) }}"><i class="far fa-thumbs-down"></i></a>
                                 </div>
                                 <p class="card-text"> {{ question.body|truncate(100) }} </p>
-                                <p><a href="/questions/{{ question.id }}">Read more</a></p>
+                                <p><a href="{{ route('question', {'id': question.id}) }}">Read more</a></p>
                                 <footer class="blockquote-footer">asked by {{ question.user.name }}, <cite> {{ question.created_at.strftime('%B %d - %I:%M:%S') }} </cite></footer>
                             </div>
                         </div>

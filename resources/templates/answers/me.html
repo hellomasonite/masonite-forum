@@ -12,9 +12,9 @@
                             <div class="col">
                                 <div class="card border-light mb-3">
                                     <div class="card-body">
-                                        <h5 class="card-title"><a href="/questions/{{answer.question.id}}">{{ answer.question.title }}</a></h5>
+                                        <h5 class="card-title"><a href="{{ route('question', {'id': answer.question.id}) }}">{{ answer.question.title }}</a></h5>
                                         <p class="card-text"> {{ answer.body|truncate(100) }} </p>
-                                        <p><a href="/questions/{{answer.question.id}}">Read more</a></p>
+                                        <p><a href="{{ route('question', {'id': answer.question.id}) }}">Read more</a></p>
                                     </div>
                                 </div>
                             </div>
