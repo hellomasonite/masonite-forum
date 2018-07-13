@@ -67,10 +67,6 @@ class QuestionController:
         question.save()
 
         return Request.back()
-        # set the accepted_answer column on database to answer 
-        # save
-        # redirect back
-        pass
 
     def downvote(self, Request, Session):
         id = Request.param('id')
