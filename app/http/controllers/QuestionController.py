@@ -60,6 +60,17 @@ class QuestionController:
             user_id=Request.user().id
         )
         return Request.redirect('/questions/@id', {'id': id})
+    
+    def accept_answer(self, Request):
+        question = Question.find(Request.param('id'))
+        question.accepted_answer = Request.param('answer_id')
+        question.save()
+
+        return Request.back()
+        # set the accepted_answer column on database to answer 
+        # save
+        # redirect back
+        pass
 
     def downvote(self, Request, Session):
         id = Request.param('id')

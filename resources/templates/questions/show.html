@@ -23,12 +23,27 @@
                 {% endif %}
                 <div>
                     {% for answer in question.answers %}
-                        <div class="media mb-4">
+                        <div class="media mb-4 answer {{ show_if(question.accepted_answer, answer.id, 'accepted-answer') }}">
                             <img class="d-flex mr-3 rounded-circle" src="http://placehold.it/50x50" alt="">
                             <div class="media-body">
                                 <h5 class="mt-0"> {{ answer.user.name }} </h5>
                                 {{ answer.body }}
                             </div>
+
+                            {% if question.accepted_answer == answer.id %}
+                                <button type="submit" class="help-text btn btn-light">
+                                    Accepted Answer
+                                </button>
+                            {% elif not question.accepted_answer %}
+                            <form action="{{ route('question.accept', {'id': question.id, 'answer_id': answer.id}) }}" method="POST">
+                                {{ csrf_field|safe }}
+                                {{ back(request().path)|safe }}
+                                <button type="submit" class="help-text btn btn-success">
+                                    Accept Answer
+                                </button>
+                            </form>
+                            {% endif %}
+
                         </div>
                     {% else %}
                         <div class="card text-center">
