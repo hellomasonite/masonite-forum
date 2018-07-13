@@ -20,6 +20,7 @@ from masonite.providers import (
 
 from app.providers.MiddlewareProvider import MiddlewareProvider
 from app.providers.UserModelProvider import UserModelProvider
+from app.providers.ViewHelperProvider import ViewHelperProvider
 
 '''
 |--------------------------------------------------------------------------
@@ -60,4 +61,5 @@ PROVIDERS = [
     # Application Providers
     UserModelProvider,
     MiddlewareProvider,
+    ViewHelperProvider,
 ]

@@ -19,6 +19,7 @@ ROUTES = [
         RouteGroup([
             post('', 'QuestionController@store').name('list'),
             post('/@id/answers', 'AnswerController@store').name('answers'),
+            post('/@id/answers/@answer_id/accept', 'QuestionController@accept_answer').name('accept'),
             get('/@id/upvote', 'QuestionController@upvote').name('upvote'),
             get('/@id/downvote', 'QuestionController@downvote').name('downvote'),
         ], prefix='/questions', name='question.'),
