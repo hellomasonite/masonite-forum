@@ -1,6 +1,6 @@
 ''' Web Routes '''
-from masonite.helpers.routes import get, post, group
-from masonite.routes import RouteGroup
+from masonite.helpers.routes import get, post
+from masonite.routes import RouteGroup as group
 
 ROUTES = [
     get('/', 'HomeController@index').name('welcome'),
@@ -11,12 +11,12 @@ ROUTES = [
     get('/questions/@id', 'QuestionController@show').name('question'),
 
 
-    RouteGroup([
+    group([
         get('/logout', 'LoginController@logout'),
         get('/ask', 'QuestionController@create').name('ask'),
 
         # Question Routes
-        RouteGroup([
+        group([
             post('', 'QuestionController@store').name('list'),
             post('/@id/answers', 'AnswerController@store').name('answers'),
             post('/@id/answers/@answer_id/accept', 'QuestionController@accept_answer').name('accept'),
@@ -25,7 +25,7 @@ ROUTES = [
         ], prefix='/questions', name='question.'),
 
         # Me Routes
-        RouteGroup([
+        group([
             get('/questions', 'QuestionController@questions').name('questions'),
             get('/answers', 'AnswerController@answers').name('answers'),
         ], prefix='/me', name='me.')
