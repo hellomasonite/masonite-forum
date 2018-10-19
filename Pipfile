@@ -9,6 +9,7 @@ masonite = "*"
 masonite-cli = "*"
 "psycopg2-binary" = "*"
 "psycopg2" = "*"
+libsass = "*"
 
 [dev-packages]
 
