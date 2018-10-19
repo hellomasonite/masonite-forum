@@ -14,3 +14,36 @@
 .accepted-answer{
     background-color: #2ecc71;
 }
+
+.front-page {
+    background-color: rgba(0,25,0,.85);
+    background-image: url(https://image.ibb.co/k1Njuk/Stock_Snap_T2_SO7_MDTYS.jpg);
+    background-position: 0 45%;
+    background-blend-mode: overlay;
+    background-repeat: no-repeat;
+    background-size: cover;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 200px;
+    text-align: center;
+}
+
+.search {
+    background: #465775;
+    border: 0;
+    border-radius: 20px;
+    color: #fff;
+    font-weight: 100;
+    text-indent: 22px;
+    padding: 7px 12px;
+    outline: 0;
+    width: 400px;
+    height: 38px;
+    transition-duration: .4s;
+}
+
+input::placeholder {
+    color: white;
+}

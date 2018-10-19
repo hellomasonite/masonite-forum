@@ -22,8 +22,7 @@ class RegisterController(object):
         if not ok:
             display = ''
             for error in errors:
-                display += '{0} {1} \n\n\n'.format(error.title(), errors[error][0])
-            Session.flash('danger', display)
+                Session.flash(error, '{0} {1} \n\n\n'.format(error.title(), errors[error][0]))
             return Request.redirect('/register')
 
         # register the user
@@ -45,7 +44,7 @@ class RegisterController(object):
 
     def validate_input(self, data):
         rules = {
-            'name': [Required, Not(Blank())],
+            'name': [Required, Not(Blank()),Length(3)],
             'email': [Required, Not(Blank())],
             'password': [Required, Not(Blank()),Length(6)],
         }

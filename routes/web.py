@@ -3,21 +3,21 @@ from masonite.helpers.routes import get, post
 from masonite.routes import RouteGroup as group
 
 ROUTES = [
-    get('/', 'HomeController@index').name('welcome'),
+    get('/', 'HomeController@index').name('home'),
     get('/login', 'LoginController@show').name('login'),
     post('/login', 'LoginController@store'),
-    get('/register', 'RegisterController@show'),
-    post('/register', 'RegisterController@store'),
+    get('/register', 'RegisterController@show').name('register'),
+    post('/register', 'RegisterController@store').name('register'),
     get('/questions/@id', 'QuestionController@show').name('question'),
 
 
     group([
-        get('/logout', 'LoginController@logout'),
-        get('/ask', 'QuestionController@create').name('ask'),
+        get('/logout', 'LoginController@logout').name('logout'),
 
         # Question Routes
         group([
-            post('', 'QuestionController@store').name('list'),
+            get('/create', 'QuestionController@create').name('create'),
+            post('', 'QuestionController@store').name('store'),
             post('/@id/answers', 'AnswerController@store').name('answers'),
             post('/@id/answers/@answer_id/accept', 'QuestionController@accept_answer').name('accept'),
             get('/@id/upvote', 'QuestionController@upvote').name('upvote'),

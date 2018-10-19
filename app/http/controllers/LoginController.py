@@ -17,10 +17,10 @@ class LoginController(object):
             Session.flash('success', 'Logged successfuly!')
             return Request.redirect('/')
         else:
-            Session.flash('danger', 'Incorrect username/password!')
+            Session.flash('login_error', 'These credentials do not match our records.')
             return Request.redirect('/login')
 
     def logout(self, Request, Session):
         Auth(Request).logout()
         Session.flash('success', 'You\'re logged out. Have a great day!')
-        return Request.redirect('/login')
+        return Request.redirect('/')

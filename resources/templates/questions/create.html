@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <h4>Ask Question!</h4>
             <br>
-            <form action="{{ route('question.list') }}" method="POST">
+            <form action="{{ route('question.store') }}" method="POST">
                 {{ csrf_field|safe }}
                 <div class="form-group">
                     <label for="title">Title</label>

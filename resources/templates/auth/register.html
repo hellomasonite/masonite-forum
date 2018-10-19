@@ -3,29 +3,53 @@
 {% block content %}
     <div class="container">
         <div class="row justify-content-center">
-            <div class="col-md-4">
-                <h4>Please, register!</h4>
-                <br>
-                <form action="/register" method="POST">
-                    {{ csrf_field|safe }}
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter username">
+            <div class="col-lg-6 col-md-6 col-sm-8">
+                <h2 class="text-center pb-3">Welcome To Masonite Forum 👋</h2>
+                <div class="card" style="border: 0.2rem solid #f7f7f9">
+                    <div class="card-body">
+                        <h3 class="card-title text-center"> Create Your Account </h3>
+                        <form action="{{ route('register') }}" method="POST">
+                            {{ csrf_field|safe }}
+                            <fieldset>
+                                <div class="form-group">
+                                    <label for="name"> Full Name </label>
+                                    <input type="text" class="form-control {% if session().has('name') %} is-invalid {% endif %}" id="name" name="name" placeholder="Full Name" required>
+                                    {% if session().has('name') %}
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ session().get('name') }}</strong>
+                                        </span>
+                                    {% endif %}
+                                </div>
+                                <div class="form-group">
+                                    <label for="password"> Email </label>
+                                    <input type="email" class="form-control {% if session().has('email') %} is-invalid {% endif %}" id="email" name="email" placeholder="Email" required>
+                                    {% if session().has('email') %}
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ session().get('email') }}</strong>
+                                        </span>
+                                    {% endif %}
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="password"> Password </label>
+                                    <input type="password" class="form-control {% if session().has('password') %} is-invalid {% endif %}" id="password" name="password" placeholder="Password" required>
+                                    {% if session().has('password') %}
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ session().get('password') }}</strong>
+                                        </span>
+                                    {% endif %}
+                                </div>
+                                <p class="float-right small mt-1">
+                                    <a href="#"> Forgot your password?</a>
+                                </p>
+                                <button type="submit" class="btn btn-primary btn-block"> Register </button>
+                            </fieldset>
+                        </form>
                     </div>
-                    <div class="form-group">
-                        <label for="email">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email">
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-primary btn-block">Register</button>
-                </form>
-                <br>
-                <p>
-                    Already have an account? <a href="/login"><b> Log in here!</b></a>
-                </p>
+                </div>
+                <div class="text-center mt-4 mb-2">
+                    <a href="{{ route('login') }}" class="btn btn-block btn-primary"> Login</a>
+                </div>
             </div>
         </div>
     </div>

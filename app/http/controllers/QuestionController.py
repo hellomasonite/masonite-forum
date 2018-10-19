@@ -8,14 +8,13 @@ class QuestionController:
     ''' Class Docstring Description '''
 
     def show(self, Request):
+        print('là')
         question = Question.find(Request.param('id'))
         return view('questions/show', {'question': question})
 
-    def index(self):
-        pass
-
     def create(self):
-        return view('questions/new')
+        print('here')
+        return view('questions/create')
 
     def store(self, Request, Session):
         tags = Request.input('tags')
