@@ -31,7 +31,7 @@
 }
 
 .search {
-    background: #465775;
+    background: rgba(0,25,0,.85);
     border: 0;
     border-radius: 20px;
     color: #fff;
@@ -39,8 +39,9 @@
     text-indent: 22px;
     padding: 7px 12px;
     outline: 0;
-    width: 400px;
-    height: 38px;
+    width: 100%;
+    /* width: 400px;
+    height: 38px; */
     transition-duration: .4s;
 }
 
