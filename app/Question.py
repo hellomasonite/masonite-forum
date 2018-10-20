@@ -6,13 +6,18 @@ from app.Vote import Vote
 from markdown2 import Markdown
 
 class Question(Model):
-    __fillable__ = ['title', 'user_id', 'body', 'tags']
+    __fillable__ = ['title', 'user_id', 'body', 'tags', 'category_id']
     __table__ = 'questions'
 
     @belongs_to('user_id', 'id')
     def user(self):
         from app.User import User
         return User
+    
+    @belongs_to('category_id', 'id')
+    def category(self):
+        from app.Category import Category
+        return Category
     
     @has_many
     def answers(self):

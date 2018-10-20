@@ -29,7 +29,9 @@
                             <tr>
                                 <td class="text-center">
                                     <div class="d-block">
-                                        <img src="http://via.placeholder.com/50x50/579626/fff?text={{question.user.name.0}}" alt="" style="border-radius: 5px">
+                                        <a href="{{ route('users.show', {'id': question.user.id}) }}">
+                                            <img src="http://via.placeholder.com/50x50/579626/fff?text={{question.user.name.0}}" alt="" style="border-radius: 5px">
+                                        </a>
                                     </div>
                                 </td>
                                 <td>

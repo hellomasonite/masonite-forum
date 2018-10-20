@@ -8,10 +8,10 @@
             {% if auth() %}
                 <div class="dropdown ml-1">
                     <a class="nav-item nav-link dropdown-toggle mr-md-2" href="#" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img src="http://via.placeholder.com/30x30/579626/fff?text=A" alt="" class="mr-2 rounded">
+                        <img src="http://via.placeholder.com/30x30/579626/fff?text={{auth().name.0}}" alt="" class="mr-2 rounded">
                     </a>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">View Profile</a>
+                        <a class="dropdown-item" href="{{ route('users.show', {'id': auth().id}) }}">View Profile</a>
                         <a class="dropdown-item" href="#">Account settings</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="{{ route('logout') }}">Logout</a>

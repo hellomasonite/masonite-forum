@@ -2,16 +2,22 @@
 from app.User import User
 from app.Question import Question
 from app.Vote import Vote
+from app.Category import Category
 from app.validators.QuestionValidator import QuestionValidator
 
 class QuestionController:
 
     def show(self, Request):
-        question = Question.find(Request.param('id'))
-        return view('questions/show', {'question': question})
+        categories = Category.all()
+        try:
+            question = Question.find_or_fail(Request.param('id'))
+        except:
+            pass
+        return view('questions/show', {'question': question, 'categories': categories})
 
     def create(self):
-        return view('questions/create')
+        categories = Category.all()
+        return view('questions/create', {'categories': categories})
 
     def store(self, Request, Session):
         tags = Request.input('tags')
@@ -26,6 +32,7 @@ class QuestionController:
         Question.create(
             title=Request.input('title'),
             body=Request.input('body'),
+            category_id=Request.input('category_id'),
             user_id=Request.user().id,
             tags=self.clean_tags(tags)
         )

@@ -30,6 +30,14 @@
                     <label for="tag">Tags</label>
                     <input type="text" name="tags" value="python, masonite" data-role="tagsinput" />
                 </div>
+                <div class="form-group">
+                    <label for="tag">Category</label>
+                    <select class="custom-select" name="category_id" id="category_id">
+                        {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </form>
         </div>

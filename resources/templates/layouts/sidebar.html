@@ -3,7 +3,9 @@
     <ul class="list-group">
         {% for category in categories %}
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            <a href="#" style="text-decoration: none">{{ category.name }}</a>
+            <form action="">
+                <a href="#" style="text-decoration: none">{{ category.name }}</a>
+            </form>
             <i style="color: {{category.random_color()}}" class="fa fa-circle mr-2"></i>
         </li>
         {% endfor %}

@@ -1,0 +1,48 @@
+{% extends 'layouts/app.html' %} 
+
+{% block content %}
+<div class="container pt-5">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card" style="width: 18rem;">
+                <img class="card-img-top" src="http://via.placeholder.com/90x70/579626/fff?text={{user.name.0}}" alt="Card image cap">
+                <div class="card-body">
+                    <h5 class="card-title">{{ user.name }}</h5>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Joined {{ user.created_at.strftime('%B %d - %I:%M:%S') }}</li>
+                </ul>
+            </div>
+        </div>
+        <div class="col-md-8">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Questions</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Answers</a>
+                </li>
+            </ul>
+            <div class="tab-content" id="myTabContent">
+                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                    <ul class="list-group">
+                        {% for question in user.questions() %}
+                            <li class="list-group-item"> 
+                                Posted <a href="{{ route('questions.show', {'id': question.id}) }}">
+                                    {{ question.title|truncate(60) }}</a> on {{ question.created_at.strftime('%B %d - %I:%M:%S') }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                    {% for answer in user.answers() %}
+                        <li class="list-group-item"> Commented <a href="{{ route('questions.show', {'id': answer.question.id}) }}">{{ answer.body|truncate(60) }}</a> on {{ answer.created_at.strftime('%B %d - %I:%M:%S') }}</li>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 
+
+{% block javascript %} {% endblock %}
