@@ -9,4 +9,5 @@ class AddCategoriesToQuestionsTable(Migration):
             table.foreign('category_id').references('id').on('categories')
 
     def down(self):
-        pass
+        with self.schema.table('questions') as table:
+            table.drop_column('category_id')

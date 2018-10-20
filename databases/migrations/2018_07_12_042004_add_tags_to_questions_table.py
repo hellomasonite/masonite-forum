@@ -15,4 +15,4 @@ class AddTagsToQuestionsTable(Migration):
         Revert the migrations.
         """
         with self.schema.table('questions') as table:
-            pass
+            table.drop_column('tags')

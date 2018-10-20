@@ -88,7 +88,7 @@
                                 </li>
                             {% endfor %}
                         {% endif %}
-                        {% if questions.current_page != questions.last_page %}
+                        {% if questions.current_page != questions.last_page and questions.current_page != 1 %}
                         <li class="page-item">
                             <form method="GET">
                                 <input type="number" hidden value="{{ questions.next_page }}" name="page" id="page">

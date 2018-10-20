@@ -9,6 +9,7 @@ ROUTES = [
     get('/register', 'RegisterController@show').name('register'),
     post('/register', 'RegisterController@store').name('register'),
     get('/questions/@id:int', 'QuestionController@show').name('questions.show'),
+    get('/categories/@id:int/questions', 'CategoryController@index').name('categories.questions.index'),
     get('/users/@id:int', 'UserController@show').name('users.show'),
 
     group([

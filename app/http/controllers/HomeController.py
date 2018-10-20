@@ -18,6 +18,6 @@ class HomeController(object):
         search = Request.input('search')
 
         if search:
-            questions = Question.where('title', 'like', '%{0}%'.format(search)).get()
+            questions = Question.where('title', 'like', '%{0}%'.format(search)).paginate(10, int(page))
 
         return view('index', {'questions': questions, 'categories': categories})
