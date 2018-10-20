@@ -1,5 +1,7 @@
 # masonite-forum
 
+![alt text](preview.png "Masonite Forum")
+
 ## About
 Vote based Question & Answer site built using Masonite Framework. 
 
