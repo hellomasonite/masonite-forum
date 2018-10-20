@@ -6,19 +6,29 @@
         <div class="col-md-8">
             <h4>Ask Question!</h4>
             <br>
-            <form action="{{ route('question.store') }}" method="POST">
+            <form action="{{ route('questions.store') }}" method="POST" novalidate>
                 {{ csrf_field|safe }}
                 <div class="form-group">
                     <label for="title">Title</label>
-                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter title">
+                    <input type="text" class="form-control {% if session().has('title') %} is-invalid {% endif %}" id="title" name="title" placeholder="Enter title" required>
+                    {% if session().has('title') %}
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ session().get('title') }}</strong>
+                        </span>
+                    {% endif %}
                 </div>
                 <div class="form-group">
                     <label for="body">Description</label>
-                    <textarea name="body" id="body" class="form-control" cols="30" rows="5"></textarea>
+                    <textarea name="body" id="body" class="form-control {% if session().has('body') %} is-invalid {% endif %}" cols="30" rows="5"></textarea>
+                    {% if session().has('body') %}
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ session().get('body') }}</strong>
+                        </span>
+                    {% endif %}
                 </div>
                 <div class="form-group">
                     <label for="tag">Tags</label>
-                    <input type="text" name="tags" value="Amsterdam, Cairo" data-role="tagsinput" />
+                    <input type="text" name="tags" value="python, masonite" data-role="tagsinput" />
                 </div>
                 <button type="submit" class="btn btn-primary btn-block">Submit</button>
             </form>

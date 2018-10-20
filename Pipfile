@@ -10,6 +10,7 @@ masonite-cli = "*"
 "psycopg2-binary" = "*"
 "psycopg2" = "*"
 libsass = "*"
+"markdown2" = "*"
 
 [dev-packages]
 

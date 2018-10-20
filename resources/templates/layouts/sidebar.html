@@ -1,31 +1,11 @@
-<!-- <div class="col-md-3">
-    <ul class="nav flex-column">
-        <li class="nav-item">
-            <a class="nav-link active" href="{{ route('me.questions') }}">My questions</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="{{ route('me.answers') }}">My answers</a>
-        </li>
-    </ul>
-</div> -->
 <div class="col-md-3">
     <a class="btn btn-outline-primary btn-block btn-sm mb-1" href="{{ route('questions.create') }}">Ask A Question</a>
     <ul class="list-group">
+        {% for category in categories %}
         <li class="list-group-item d-flex justify-content-between align-items-center">
-            All
-            <i style="color: #000000" class="fa fa-circle mr-2"></i>
+            <a href="#" style="text-decoration: none">{{ category.name }}</a>
+            <i style="color: {{category.random_color()}}" class="fa fa-circle mr-2"></i>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Python
-            <i style="color: #9b59b6" class="fa fa-circle mr-2"></i>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Orator
-            <i style="color: #4ea1d3" class="fa fa-circle mr-2"></i>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-            Craft
-            <i style="color: #F29B34" class="fa fa-circle mr-2"></i>
-        </li>
+        {% endfor %}
     </ul>
 </div>

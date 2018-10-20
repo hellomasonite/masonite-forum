@@ -3,6 +3,7 @@ from config.database import Model
 from orator.orm import belongs_to, has_many
 from app.Answer import Answer
 from app.Vote import Vote
+from markdown2 import Markdown
 
 class Question(Model):
     __fillable__ = ['title', 'user_id', 'body', 'tags']
@@ -25,6 +26,10 @@ class Question(Model):
             return votes.last().value
         
         return 0
+    
+    def body_converted(self):
+        markdowner = Markdown()
+        return markdowner.convert(self.body)
     
     def get_tags(self):
         return self.tags.split(',')

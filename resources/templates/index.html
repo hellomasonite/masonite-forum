@@ -1,77 +1,72 @@
-{% extends "layouts/app.html" %}
-{% block content %}
+{% extends "layouts/app.html" %} {% block content %}
 <div class="front-page">
     <div class="container">
         <div class="row text-center justify-content-center">
             <div class="col-md-8">
-                <h1>Welcome to Masonite's biggest forum 🎉</h1>
+                <h1>Welcome to Masonite Forum 🎉</h1>
                 <p>Vote based Question & Answer site built using Masonite Framework.</p>
             </div>
         </div>
     </div>
 </div>
 <div class="container pt-5">
-    <div class="row justify-content-center pb-5">
-        <div class="col-md-6">
+    <form method="GET">
+        <div class="row justify-content-center pb-5">
+            <div class="col-md-6">
                 <div class="text-center">
-                    <input type="text" class="search" placeholder="Search..." autofocus>
+                    <input type="text" name="search" id="search" class="search" placeholder="Search..." autofocus>
                 </div>
+            </div>
         </div>
-    </div>
+    </form>
     <div class="row">
         {% include('layouts/sidebar.html') %}
         <div class="col-md-9">
-            <div>
-                <div class="media text-muted pt-3">
-                    <img src="http://via.placeholder.com/50x50/579626/fff?text=A" alt="" class="mr-2 rounded">
-                    <p class="media-body pb-3 mb-0 lh-125">
-                        <strong class="d-block text-gray-dark"><i class="fas fa-thumbtack"></i> <a href="#">Looking for Python or Masonite work? / Hiring Python or Masonite developers?</a></strong>
-                        Similar to the Hacker News thread, I thought we might start up a thread for anyone looking to hire a Python / Masonite freelancer or if you're a freelancer looking for work...
-                    </p>
-                </div>
-                <p class="small text-right">
-                    GENERAL • Asked on May 15 by Chris Oliver
-                </p>
-            </div>
-            {% for question in questions %}
-                <div class="row">
-                    <div class="col">
-                        <div class="card border-light mb-3">
+            <div class="table-responsive">
+                <table class="table table-hover table-outline table-vcenter text-nowrap card-table">
+                    <tbody>
+                        {% for question in questions %}
+                            <tr>
+                                <td class="text-center">
+                                    <div class="d-block">
+                                        <img src="http://via.placeholder.com/50x50/579626/fff?text={{question.user.name.0}}" alt="" style="border-radius: 5px">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div><a href="{{ route('questions.show', {'id': question.id}) }}">{{ question.title|truncate(40) }}</a></div>
+                                    <div class="small text-muted">
+                                        {{ question.body|truncate(40) }}
+                                    </div>
+                                    <p class="small">
+                                        {% for tag in question.get_tags() %} {% if tag %}
+                                        <span class="badge badge-primary">
+                                            #{{ tag }}
+                                        </span>
+                                        {% endif %} {% endfor %}
+                                    </p>
+                                </td>
+                                <td>
+                                    <div class="small text-muted">{{ question.user.name }}</div>
+                                    <div>{{ question.created_at.strftime('%B %d - %I:%M:%S') }}</div>
+                                </td>
+                                <td class="text-center">
+                                    <div class="chart-circle-value"> {{ question.answers|length }} </div>
+                                    <div class="">
+                                        posts
+                                    </div>
+                                </td>
+                            </tr>
+                        {% else %}
+                        <div class="card text-center" style="border: 0.2rem solid #f7f7f9">
                             <div class="card-body">
-                                <h5 class="card-title">
-                                    <a href="{{ route('question', {'id': question.id}) }}">{{ question.title }}</a>
-                                </h5>
-                                <div class="btn-group" role="group" aria-label="Basic example">
-                                    <a class="btn" href="{{ route('question.upvote', {'id': question.id}) }}"><i class="far fa-thumbs-up"></i></a>
-                                    <a class="btn"> <span class="badge badge-primary"> {{ question.votes(question.id) }} </span> </a>
-                                    <a class="btn" href="{{ route('question.downvote', {'id': question.id}) }}"><i class="far fa-thumbs-down"></i></a>
-                                </div>
-                                <p class="card-text"> {{ question.body|truncate(100) }} </p>
-                                <p><a href="{{ route('question', {'id': question.id}) }}">Read more</a></p>
-                                <p class="text-muted">
-                                    tags: 
-                                    {% for tag in question.get_tags() %} 
-                                        {% if tag %}
-                                            <span class="badge badge-primary">
-                                                #{{ tag }}
-                                            </span> 
-                                        {% endif %} 
-                                    {% endfor %}
-                                </p>
-                                <footer class="blockquote-footer">asked by {{ question.user.name }}, <cite> {{ question.created_at.strftime('%B %d - %I:%M:%S') }} </cite></footer>
-                                
+                                <h5 class="card-title">No questions found</h5>
+                                <a href="{{ route('questions.create') }}" class="btn btn-primary">Ask question!</a>
                             </div>
                         </div>
-                    </div>
-                </div>
-            {% else %}
-                <div class="card text-center">
-                    <div class="card-body">
-                        <h5 class="card-title">No questions found</h5>
-                        <a href="/ask" class="btn btn-primary">Ask question!</a>
-                    </div>
-                </div>
-            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

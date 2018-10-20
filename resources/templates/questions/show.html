@@ -1,5 +1,73 @@
 {% extends 'layouts/app.html' %}
 
 {% block content %}
-
+    <div class="container">
+        <div class="row">
+            {% include('layouts/sidebar.html') %}
+            <div class="col-md-9">
+                <p><a href="{{ route('home') }}" class="btn btn-primary">Back to questions</a></p>
+                <div class="card" style="border: 0.2rem solid #f7f7f9">
+                    <div class="card-header">
+                        <img class="img-fluid" src="http://via.placeholder.com/30x30/579626/fff?text={{ question.user.name.0 }}" alt=""> <small>{{ question.user.name }} on {{ question.created_at.strftime('%B %d - %I:%M:%S') }}</small>
+                    </div>
+                    <div class="card-body">
+                        <h5 class="card-title">{{ question.title }}</h5>
+                        <p class="card-text"> {{ question.body_converted()|safe }} </p>
+                    </div>
+                </div>
+                {% if question.answers|length >0 %}
+                    <p> {% if question.answers|length == 1 %} 1 Answer {% else %} {{ question.answers|length }} Answers {% endif %}</p>
+                {% endif %}
+                <div>
+                    {% for answer in question.answers %}
+                        <div class="card mt-3" style="border: 0.2rem solid #f7f7f9">
+                            <div class="card-header">
+                                <img class="img-fluid" src="http://via.placeholder.com/30x30/579626/fff?text={{answer.user.name.0}}" alt=""> <small>{{ answer.user.name }} on {{ answer.created_at.strftime('%B %d - %I:%M:%S') }}</small>
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text"> {{ answer.body_converted()|safe }} </p>
+                            </div>
+                            <div class="card-footer text-center text-muted">
+                                <p class="">
+                                    {% if question.accepted_answer == answer.id %}
+                                        <button type="submit" class="help-text btn btn-primary">
+                                            Accepted Answer
+                                        </button>
+                                    {% elif not question.accepted_answer %}
+                                    <form action="{{ route('questions.accept', {'id': question.id, 'answer_id': answer.id}) }}" method="POST">
+                                        {{ csrf_field|safe }}
+                                        {{ back(request().path)|safe }}
+                                        <button type="submit" class="help-text btn btn-success">
+                                            Accept Answer
+                                        </button>
+                                    </form>
+                                    {% endif %}
+                                </p>
+                            </div>
+                        </div>
+                        
+                    {% else %}
+                        <div class="card text-center" style="border: 0.2rem solid #f7f7f9">
+                            <div class="card-body">
+                                <h5 class="card-title">No answers yet.</h5>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <form action="{{ route('questions.answers', {'id': question.id}) }}" method="POST" novalidate>
+                    {{ csrf_field|safe }}
+                    <div class="form-group">
+                        <label for="body"><b>Your Answer</b></label>
+                        <textarea name="body" id="body" class="form-control {% if session().has('body') %} is-invalid {% endif %}" cols="30" rows="5"></textarea>
+                        {% if session().has('body') %}
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ session().get('body') }}</strong>
+                            </span>
+                        {% endif %}
+                    </div>
+                    <button type="submit" class="btn btn-block btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock %}

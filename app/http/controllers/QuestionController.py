@@ -5,15 +5,12 @@ from app.Vote import Vote
 from app.validators.QuestionValidator import QuestionValidator
 
 class QuestionController:
-    ''' Class Docstring Description '''
 
     def show(self, Request):
-        print('là')
         question = Question.find(Request.param('id'))
         return view('questions/show', {'question': question})
 
     def create(self):
-        print('here')
         return view('questions/create')
 
     def store(self, Request, Session):
@@ -23,9 +20,8 @@ class QuestionController:
         if not validate.check():
             display = ''
             for error in validate.errors():
-                display += '{0} {1} \n\n\n'.format(error.title(), validate.errors()[error][0])
-            Session.flash('danger', display)
-            return Request.redirect('/ask')
+                Session.flash(error, '{0} {1} \n\n\n'.format(error.title(), validate.errors()[error][0]))
+            return Request.redirect_to('questions.create')
         
         Question.create(
             title=Request.input('title'),

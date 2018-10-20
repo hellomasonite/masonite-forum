@@ -8,7 +8,7 @@ ROUTES = [
     post('/login', 'LoginController@store'),
     get('/register', 'RegisterController@show').name('register'),
     post('/register', 'RegisterController@store').name('register'),
-    get('/questions/@id', 'QuestionController@show').name('question'),
+    get('/questions/@id:int', 'QuestionController@show').name('questions.show'),
 
 
     group([
@@ -22,7 +22,7 @@ ROUTES = [
             post('/@id/answers/@answer_id/accept', 'QuestionController@accept_answer').name('accept'),
             get('/@id/upvote', 'QuestionController@upvote').name('upvote'),
             get('/@id/downvote', 'QuestionController@downvote').name('downvote'),
-        ], prefix='/questions', name='question.'),
+        ], prefix='/questions', name='questions.'),
 
         # Me Routes
         group([
