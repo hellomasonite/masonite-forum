@@ -11,7 +11,7 @@ class CategoryController:
         try:
             category = Category.find_or_fail(category_id)
         except:
-            pass
+            return Request.status('404 Not Found')
         categories = Category.all()
         questions = Question.where('category_id', category.id).paginate(10, int(page))
 

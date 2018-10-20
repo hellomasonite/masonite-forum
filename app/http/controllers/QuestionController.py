@@ -12,7 +12,7 @@ class QuestionController:
         try:
             question = Question.find_or_fail(Request.param('id'))
         except:
-            pass
+            return Request.status('404 Not Found')
         return view('questions/show', {'question': question, 'categories': categories})
 
     def create(self):
