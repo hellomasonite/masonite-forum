@@ -6,7 +6,7 @@
             {% include('layouts/sidebar.html') %}
             <div class="col-md-9">
                 <p><a href="{{ route('home') }}" class="btn btn-primary">Back to questions</a></p>
-                <div class="card" style="border: 0.2rem solid #f7f7f9">
+                <div class="card">
                     <div class="card-header">
                         <img class="img-fluid" src="http://via.placeholder.com/30x30/579626/fff?text={{ question.user.name.0 }}" alt=""> <small>{{ question.user.name }} on {{ question.created_at.strftime('%B %d - %I:%M:%S') }}</small>
                     </div>
@@ -20,7 +20,7 @@
                 {% endif %}
                 <div>
                     {% for answer in question.answers %}
-                        <div class="card mt-3" style="border: 0.2rem solid #f7f7f9">
+                        <div class="card mt-3">
                             <div class="card-header">
                                 <img class="img-fluid" src="http://via.placeholder.com/30x30/579626/fff?text={{answer.user.name.0}}" alt=""> <small>{{ answer.user.name }} on {{ answer.created_at.strftime('%B %d - %I:%M:%S') }}</small>
                             </div>
@@ -47,7 +47,7 @@
                         </div>
                         
                     {% else %}
-                        <div class="card text-center" style="border: 0.2rem solid #f7f7f9">
+                        <div class="card text-center">
                             <div class="card-body">
                                 <h5 class="card-title">No answers yet.</h5>
                             </div>

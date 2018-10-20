@@ -47,3 +47,8 @@
 input::placeholder {
     color: white;
 }
+
+.card {
+    border: 0.2rem solid #f7f7f9
+}
+
