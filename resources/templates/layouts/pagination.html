@@ -8,7 +8,12 @@
             </form>
         </li>
         {% endif %}
-        {% for i in range(1, (questions.total / questions.count())|round|int + 1)  %}
+        {% if questions.has_more_pages() %}
+            {% set count = questions.count() + 1 %}
+        {% else %}
+            {% set count = questions.count() %}
+        {% endif %}
+        {% for i in range(1, (questions.total/count)|round|int)  %}
             <li class="page-item {% if questions.current_page == i %} active {% endif %}">
                 <form method="GET">
                     <input type="number" hidden value="{{ i }}" name="page" id="page">
