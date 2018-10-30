@@ -1,4 +1,5 @@
 <nav aria-label="Page navigation example">
+    {% if questions.count() > 0%}
     <ul class="pagination">
         {% if questions.current_page > 1 %}
         <li class="page-item">
@@ -30,4 +31,5 @@
         </li>
         {% endif %}
     </ul>
+    {% endif %}
 </nav>
