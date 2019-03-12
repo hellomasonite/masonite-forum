@@ -7,7 +7,6 @@ class AnswerController:
     ''' Class Docstring Description '''
 
     def store(self, Request, Session):
-        print('hehe')
         ok, errors = self.validate_input(Request.all())
         id = Request.param('id')
         if not ok:
