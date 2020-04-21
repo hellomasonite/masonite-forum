@@ -14,31 +14,12 @@ class LoginController:
         pass
 
     def show(self, request: Request, view: View):
-        """Show the login page.
-
-        Arguments:
-            request {masonite.request.Request} -- The Masonite request class.
-            view {masonite.view.View} -- The Masonite view class.
-
-        Returns:
-            masonite.view.View -- Returns the Masonite view class.
-        """
         if request.user():
             return request.redirect('/home')
 
         return view.render('auth/login')
 
     def store(self, request: Request, auth: Auth, validate: Validator):
-        """Login the user.
-
-        Arguments:
-            request {masonite.request.Request} -- The Masonite request class.
-            auth {masonite.auth.auth} -- The Masonite auth class.
-            validate {masonite.validator.Validator} -- The Masonite Validator class.
-
-        Returns:
-            masonite.request.Request -- The Masonite request class.
-        """
         errors = request.validate(
             validate.required(['email', 'password']),
             validate.email('email'),
