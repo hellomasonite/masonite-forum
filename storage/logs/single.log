@@ -8,3 +8,17 @@
 2020-04-21 16:29:54 - ERROR - ContainerError in /home/junior/forum/bootstrap/start.py on line 38
 2020-04-21 16:32:59 - ERROR - AttributeError in /home/junior/forum/app/http/controllers/api/TagController.py on line 15
 2020-04-21 16:33:11 - ERROR - AttributeError in /home/junior/forum/app/http/controllers/api/TagController.py on line 15
+2020-04-21 18:48:55 - ERROR - SyntaxError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 18:50:14 - ERROR - TemplateNotFound in /home/junior/forum/app/http/controllers/auth/LoginController.py on line 21
+2020-04-21 18:50:30 - ERROR - TemplateNotFound in /home/junior/forum/app/http/controllers/auth/LoginController.py on line 21
+2020-04-21 18:52:11 - ERROR - ContainerError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 18:52:52 - ERROR - ContainerError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 18:55:37 - ERROR - ContainerError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 18:57:55 - ERROR - ContainerError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 19:00:06 - ERROR - ContainerError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 19:01:12 - ERROR - ContainerError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 19:03:04 - ERROR - TemplateNotFound in /home/junior/forum/app/http/controllers/auth/RegisterController.py on line 26
+2020-04-21 19:05:03 - ERROR - SyntaxError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 19:12:53 - ERROR - SyntaxError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 19:13:15 - ERROR - SyntaxError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 19:15:23 - ERROR - SyntaxError in /home/junior/forum/bootstrap/start.py on line 38

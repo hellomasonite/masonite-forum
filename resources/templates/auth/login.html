@@ -1,44 +1,33 @@
 {% extends 'auth/base.html' %}
 
 {% block content %}
-<div class="row my-5">
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <div class="card rounded-1">
-                    <div class="card-header">
-                        <h5 class="mb-0">Login</h5>
+<div class="row justify-content-center pt-5">
+    <div class="col-md-5">
+        <form action="{{ route('login') }}" method="POST">
+            {{ csrf_field }}
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control {{ 'is-invalid' if bag().has('email') else '' }}" name="email" value="{{ old('email') }}">
+                {% if bag().has('email') %}
+                    <div class="invalid-feedback" role="alert">
+                        <strong>{{ bag().first('email') }}</strong>
                     </div>
-                    <div class="card-body">
-                        {% if bag().any() %}
-                            {% for error in bag().messages() %}
-                                <div class="alert alert-danger" role="alert">
-                                    {{ error }}
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                        <form class="form" action="{{ route('login') }}" method="POST">
-                            {{ csrf_field }}
-                            {{ back() }}
-                            <div class="form-group">
-                                <label for="">Email</label>
-                                <input type="text" class="form-control form-control-md rounded-0" name="email"
-                                    value="{{ old('email') }}">
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" class="form-control form-control-md rounded-0" name="password">
-                            </div>
-                            <a href="{{ route('forgot.password') }}">
-                                <button type="button" class="btn btn-primary btn-md ml-2 float-right">Forgot
-                                    Password</button>
-                            </a>
-                            <button type="submit" class="btn btn-success btn-md float-right">Login</button>
-                        </form>
-                    </div>
-                </div>
+                {% endif %}
             </div>
-        </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control {{ 'is-invalid' if bag().has('password') else '' }}" name="password">
+                {% if bag().has('password') %}
+                    <div class="invalid-feedback" role="alert">
+                        <strong>{{ bag().first('password') }}</strong>
+                    </div>
+                {% endif %}
+            </div>
+            <p class="text-right">
+                <a href="{{ route('forgot.password') }}">Forgot password?</a>
+            </p>
+            <button type="submit" class="btn btn-primary btn-block">Login</button>
+        </form>
     </div>
 </div>
 {% endblock %}

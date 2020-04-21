@@ -1,43 +1,42 @@
 {% extends 'auth/base.html' %}
 
 {% block content %}
-<div class="row my-5">
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <div class="card rounded-1">
-                    <div class="card-header">
-                        <h5 class="mb-0">Register</h5>
+<div class="row justify-content-center pt-5">
+    <div class="col-md-5">
+        <form action="{{ route('register') }}" method="POST">
+            {{ csrf_field }}
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control {{ 'is-invalid' if bag().has('name') else '' }}" name="name" value="{{ old('name') }}">
+                {% if bag().has('name') %}
+                    <div class="invalid-feedback" role="alert">
+                        <strong>{{ bag().first('name') }}</strong>
                     </div>
-                    <div class="card-body">
-                        {% if bag().any() %}
-                            {% for error in bag().messages() %}
-                                <div class="alert alert-danger" role="alert">
-                                    {{ error }}
-                                </div>
-                            {% endfor %}
-                        {% endif %}
-                        <form class="form" action="{{ route('register') }}" method="POST">
-                            {{ csrf_field }}
-                            <div class="form-group">
-                                <label for="">Username</label>
-                                <input type="text" name="name" class="form-control form-control-md rounded-0" value="{{ old('name') }}">
-                            </div>
-                            <div class="form-group">
-                                <label for="">Email</label>
-                                <input type="email" name="email" class="form-control form-control-md rounded-0" value="{{ old('email') }}">
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <input type="password" name="password" class="form-control form-control-md rounded-0">
-                            </div>
-                            <button type="submit" class="btn btn-success btn-md float-right">Register
-                            </button>
-                        </form>
-                    </div>
-                </div>
+                {% endif %}
             </div>
-        </div>
+            <div class="form-group">
+                <label for="name">Email</label>
+                <input type="email" class="form-control {{ 'is-invalid' if bag().has('email') else '' }}" name="email" value="{{ old('email') }}">
+                {% if bag().has('email') %}
+                    <div class="invalid-feedback" role="alert">
+                        <strong>{{ bag().first('email') }}</strong>
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control {{ 'is-invalid' if bag().has('password') else '' }}" name="password">
+                {% if bag().has('password') %}
+                    <div class="invalid-feedback" role="alert">
+                        <strong>{{ bag().first('password') }}</strong>
+                    </div>
+                {% endif %}
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
+        </form>
+        <p class="text-center pt-3">
+            <a href="{{ route('login') }}">Already have an account?</a>
+        </p>
     </div>
 </div>
 {% endblock %}
