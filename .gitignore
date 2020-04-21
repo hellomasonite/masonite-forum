@@ -1,0 +1,10 @@
+*.pyc
+.env
+*__pycache__
+venv
+.env.*
+.vscode
+.pytest_cache
+node_modules
+package-lock.json
+!.env.testing
