@@ -1976,9 +1976,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({});
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      tags: []
+    };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    axios.get('/api/tags/').then(function (response) {
+      return _this.tags = response.data;
+    });
+  }
+});
 
 /***/ }),
 
@@ -19729,31 +19740,36 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "row pb-5" }, [
+    _c("div", { staticClass: "col-md-4" }, [
+      _vm.tags
+        ? _c(
+            "select",
+            { staticClass: "custom-select" },
+            [
+              _c("option", { attrs: { selected: "" } }, [
+                _vm._v("Open this select menu")
+              ]),
+              _vm._v(" "),
+              _vm._l(_vm.tags, function(tag) {
+                return _c("option", { key: tag.id }, [_vm._v(_vm._s(tag.name))])
+              })
+            ],
+            2
+          )
+        : _vm._e()
+    ]),
+    _vm._v(" "),
+    _vm._m(0)
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row pb-5" }, [
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("select", { staticClass: "custom-select" }, [
-          _c("option", { attrs: { selected: "" } }, [
-            _vm._v("Open this select menu")
-          ]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "1" } }, [_vm._v("One")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "2" } }, [_vm._v("Two")]),
-          _vm._v(" "),
-          _c("option", { attrs: { value: "3" } }, [_vm._v("Three")])
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col" }, [
-        _c("input", { staticClass: "form-control", attrs: { type: "text" } })
-      ])
+    return _c("div", { staticClass: "col" }, [
+      _c("input", { staticClass: "form-control", attrs: { type: "text" } })
     ])
   }
 ]

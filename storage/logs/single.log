@@ -1,0 +1,10 @@
+2020-04-21 16:06:42 - ERROR - ResponseError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 16:06:53 - ERROR - ResponseError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 16:21:17 - ERROR - ContainerError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 16:24:50 - ERROR - ContainerError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 16:26:53 - ERROR - ContainerError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 16:29:08 - ERROR - ContainerError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 16:29:38 - ERROR - ContainerError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 16:29:54 - ERROR - ContainerError in /home/junior/forum/bootstrap/start.py on line 38
+2020-04-21 16:32:59 - ERROR - AttributeError in /home/junior/forum/app/http/controllers/api/TagController.py on line 15
+2020-04-21 16:33:11 - ERROR - AttributeError in /home/junior/forum/app/http/controllers/api/TagController.py on line 15

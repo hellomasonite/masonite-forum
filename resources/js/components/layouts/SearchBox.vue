@@ -1,11 +1,9 @@
 <template>
     <div class="row pb-5">
         <div class="col-md-4">
-            <select class="custom-select">
+            <select class="custom-select" v-if="tags">
                 <option selected>Open this select menu</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+                <option v-bind:key="tag.id" v-for="tag in tags">{{ tag.name }}</option>
             </select>
         </div>
         <div class="col">
@@ -16,7 +14,15 @@
 
 <script>
 export default {
-
+    data () {
+        return {
+            tags: []
+        }
+    },
+    mounted() {
+        axios.get('/api/tags/')
+            .then(response => this.tags = response.data)
+    }
 }
 </script>
 
