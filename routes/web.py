@@ -11,8 +11,8 @@ ROUTES = [
     # Social Authentication
     RouteGroup([
         # GitHub...
-        Get('github', 'auth.SocialAuthController@login').name('login'),
-        Get('github/callback', 'auth.SocialAuthController@callback').name('callback'),
+        Get('github', 'SocialAuthController@login').name('login'),
+        Get('github/callback', 'SocialAuthController@callback').name('callback'),
     ], name='social.auth.', namespace='auth.', prefix='/auth'),
 
 ]

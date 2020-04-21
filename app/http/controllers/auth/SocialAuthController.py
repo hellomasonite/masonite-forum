@@ -14,6 +14,8 @@ class SocialAuthController(Controller):
         return socialite.driver('github').redirect()
 
     def callback(self, request: Request, socialite: Socialite):
-        user = socialite.driver(request.provider).user()
-        # => print(user)
+        user = socialite.driver('github').user()
+
+        dd(user)
+
         return request.redirect('/')
