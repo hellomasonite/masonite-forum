@@ -1,5 +1,6 @@
 """A SocialAuthController Module."""
 
+from app.User import User
 from masonite.view import View
 from socialite import Socialite
 from masonite.request import Request
