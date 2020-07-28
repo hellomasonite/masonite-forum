@@ -5,8 +5,11 @@ from routes.api import API_ROUTES
 from masonite.routes import Get, Post, RouteGroup
 
 ROUTES = [
+    # Home...
+    Get('/', 'HomeController@show').name('home'),
+
     # Questions...
-    Get('/', 'QuestionController@index').name('questions.index'),
+    Get('/questions', 'QuestionController@index').name('questions.index'),
 
     # Social Authentication
     RouteGroup([

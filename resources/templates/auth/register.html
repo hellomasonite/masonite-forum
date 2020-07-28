@@ -1,46 +1,102 @@
-{% extends 'auth/base.html' %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Masonite Forum</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
 
-{% block content %}
-<div class="row justify-content-center pt-5">
-    <div class="col-md-5">
-        <form action="{{ route('register') }}" method="POST">
-            {{ csrf_field }}
-            <div class="form-group">
-                <label for="name">Name</label>
-                <input type="text" class="form-control {{ 'is-invalid' if bag().has('name') else '' }}" name="name" value="{{ old('name') }}">
-                {% if bag().has('name') %}
-                    <div class="invalid-feedback" role="alert">
-                        <strong>{{ bag().first('name') }}</strong>
+    <style>
+      :root {
+        --color-primary: #625dc9;
+        --color-primary-hover: #5651b9;
+      }
+    </style>
+    <link rel="stylesheet" href="/css/application.css">
+  </head>
+  <body>
+    <div class="flex flex-col justify-center min-h-screen py-12 bg-gray-50 sm:px-6 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-md">
+            <a class="text-primary hover:text-primary-hover" href="/">
+                logo
+            </a>
+            <h2 class="mt-6 text-3xl font-bold leading-9 text-center text-gray-900">
+                Welcome to Masonite Forum
+            </h2>
+        </div>
+
+        <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+            <form action="{{ route('register') }}" method="POST">
+                {{ csrf_field }}
+                <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
+                    <div class="form-field {{ 'error' if bag().has('name') else '' }}">
+                        <label class="form-label block mb-1" for="name">Name</label>
+                        <input class="form-input block w-full" autofocus="autofocus" type="text" name="name" id="name" value="{{ old('name') }}"/>
+                        {% if bag().has('name') %}
+                            <span class="form-error">
+                                {{ bag().first('name') }}
+                            </span>
+                        {% endif %}
                     </div>
-                {% endif %}
-            </div>
-            <div class="form-group">
-                <label for="name">Email</label>
-                <input type="email" class="form-control {{ 'is-invalid' if bag().has('email') else '' }}" name="email" value="{{ old('email') }}">
-                {% if bag().has('email') %}
-                    <div class="invalid-feedback" role="alert">
-                        <strong>{{ bag().first('email') }}</strong>
+                    <div class="form-field mt-6 {{ 'error' if bag().has('email') else '' }}">
+                        <label class="block text-sm font-medium leading-5 text-gray-700" for="email">Email</label>
+                        <div class="mt-1 rounded-md shadow-sm">
+                            <input autocomplete="email" class="form-input block w-full" type="email" name="email" id="email" value="{{ old('email') }}"/>
+                        </div>
+                        {% if bag().has('email') %}
+                            <span class="form-error">
+                                {{ bag().first('email') }}
+                            </span>
+                        {% endif %}
                     </div>
-                {% endif %}
-            </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control {{ 'is-invalid' if bag().has('password') else '' }}" name="password">
-                {% if bag().has('password') %}
-                    <div class="invalid-feedback" role="alert">
-                        <strong>{{ bag().first('password') }}</strong>
+                    <div class="form-field mt-6 {{ 'error' if bag().has('password') else '' }}">
+                        <label class="block text-sm font-medium leading-5 text-gray-700" for="password">Password</label>
+                        <div class="mt-1 rounded-md shadow-sm">
+                            <input autocomplete="new-password" class="form-input block w-full" type="password" name="password" id="password" />
+                        </div>
+                        {% if bag().has('password') %}
+                            <span class="form-error">
+                                {{ bag().first('password') }}
+                            </span>
+                        {% endif %}
+                        <span class="form-error"></span>
                     </div>
-                {% endif %}
-            </div>
-            <button type="submit" class="btn btn-primary btn-block">Register</button>
-        </form>
-        <p class="text-center pt-4 pb-2">
-            Or continue with
-        </p>
-        <a href="{{ route('social.auth.login') }}" class="btn btn-primary btn-block">GitHub</a>
-        <p class="text-center pt-3">
-            <a href="{{ route('login') }}">Already have an account?</a>
-        </p>
-    </div>
-</div>
-{% endblock %}
+                    <div class="mt-6">
+                        <span class="block rounded-md shadow-sm">
+                            <input type="submit" value="Sign up" class="btn btn:primary w-full justify-center sm:btn:lg"/>
+                        </span>
+                    </div>
+
+                    <div class="mt-6">
+                        <div class="relative">
+                            <div class="absolute inset-0 flex items-center">
+                                <div class="w-full border-t border-gray-300"></div>
+                            </div>
+                            <div class="relative flex justify-center text-sm leading-5">
+                                <span class="px-2 text-gray-500 bg-white">
+                                    Or
+                                </span>
+                            </div>
+                        </div>
+
+                    <div class="mt-6">
+                        <div>
+                            <span class="inline-flex w-full rounded-md shadow-sm">
+                            <a class="btn btn:secondary w-full justify-center" href="{{ route('social.auth.login') }}">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github -ml-1 mr-3 h-5 w-5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                Sign up with GitHub</a>
+                            </span>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div class="mt-6 text-center">
+          <a class="text-sm inline-block font-medium text-primary hover:text-primary-hover" href="{{ route('login') }}"><span class="text-gray-700">Already have an account?</span> <span class="font-semibold underline">Sign in</span></a>
+        </div>
+      </div>
+  </body>
+</html>

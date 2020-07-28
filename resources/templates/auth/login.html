@@ -1,33 +1,103 @@
-{% extends 'auth/base.html' %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Masonite Forum</title>
+        <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, user-scalable=no"
+        />
 
-{% block content %}
-<div class="row justify-content-center pt-5">
-    <div class="col-md-5">
-        <form action="{{ route('login') }}" method="POST">
-            {{ csrf_field }}
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control {{ 'is-invalid' if bag().has('email') else '' }}" name="email" value="{{ old('email') }}">
-                {% if bag().has('email') %}
-                    <div class="invalid-feedback" role="alert">
-                        <strong>{{ bag().first('email') }}</strong>
-                    </div>
-                {% endif %}
+        <style>
+        :root {
+            --color-primary: #625dc9;
+            --color-primary-hover: #5651b9;
+        }
+        </style>
+        <link rel="stylesheet" href="/css/application.css">
+    </head>
+    <body>
+
+        <div class="flex flex-col justify-center min-h-screen py-12 bg-gray-50 sm:px-6 lg:px-8">
+            <div class="sm:mx-auto sm:w-full sm:max-w-md">
+                <a class="text-primary hover:text-primary-hover" href="{{ route('home') }}">logo</a>
+                    <h2 class="mt-6 text-3xl font-bold leading-9 text-center text-gray-900">
+                        Sign in to Masonite Forum
+                    </h2>
+                <p class="mt-2 text-sm leading-5 text-center text-gray-600 max-w">
+                    Or
+                    <a class="font-medium text-primary transition duration-150 ease-in-out hover:text-primary-hover focus:outline-none focus:underline" href="{{ route('register') }}">sign up for free</a>
+                </p>
             </div>
-            <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" class="form-control {{ 'is-invalid' if bag().has('password') else '' }}" name="password">
-                {% if bag().has('password') %}
-                    <div class="invalid-feedback" role="alert">
-                        <strong>{{ bag().first('password') }}</strong>
+
+            <div class="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
+                <form action="{{ route('login') }}" method="POST">
+                    {{ csrf_field }}
+                    <div class="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
+                        <div class="form-field {{ 'error' if bag().has('email') else '' }}">
+                            <label class="block text-sm font-medium leading-5 text-gray-700" for="email">Email</label>
+                            <div class="mt-1 rounded-md shadow-sm">
+                                <input class="form-input block w-full" type="email" name="email" id="email" value="{{ old('email') }}"/>
+                            </div>
+                            {% if bag().has('email') %}
+                                <span class="form-error">
+                                    {{ bag().first('email') }}
+                                </span>
+                            {% endif %}
+                        </div>
+
+                        <div class="mt-6 form-field {{ 'error' if bag().has('password') else '' }}">
+                            <label class="block text-sm font-medium leading-5 text-gray-700" for="password">Password</label>
+                            <div class="mt-1 rounded-md shadow-sm">
+                                <input autocomplete="new-password" class="form-input block w-full" type="password" name="password" id="password" />
+                            </div>
+                            {% if bag().has('password') %}
+                                <span class="form-error">
+                                    {{ bag().first('password') }}
+                                </span>
+                            {% endif %}
+                        </div>
+
+                        <div class="flex items-center justify-between mt-6">
+                            <div class="flex items-center">
+                            </div>
+
+                            <div class="text-sm leading-5">
+                                <a class="link" href="{{ route('forgot.password') }}">Forgot your password?</a>
+                            </div>
+                        </div>
+
+                        <div class="mt-6">
+                            <span class="block w-full rounded-md shadow-sm">
+                            <input type="submit" name="commit" value="Sign in" class="btn btn:primary w-full justify-center sm:btn:lg" data-disable-with="Sign in" />
+                            </span>
+                        </div>
+
+                        <div class="mt-6">
+                            <div class="relative">
+                                <div class="absolute inset-0 flex items-center">
+                                    <div class="w-full border-t border-gray-300"></div>
+                                </div>
+                                <div class="relative flex justify-center text-sm leading-5">
+                                    <span class="px-2 text-gray-500 bg-white">
+                                        Or
+                                    </span>
+                                </div>
+                            </div>
+
+                            <div class="mt-6">
+                                <div>
+                                    <span class="inline-flex w-full rounded-md shadow-sm">
+                                        <a class="btn btn:secondary w-full justify-center" href="{{ route('social.auth.login') }}">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-github -ml-1 mr-3 h-5 w-5"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg>
+                                            Sign in with GitHub
+                                        </a>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                {% endif %}
+                </form>
             </div>
-            <p class="text-right">
-                <a href="{{ route('forgot.password') }}">Forgot password?</a>
-            </p>
-            <button type="submit" class="btn btn-primary btn-block">Login</button>
-        </form>
-    </div>
-</div>
-{% endblock %}
+        </div>
+    </body>
+</html>
