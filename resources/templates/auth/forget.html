@@ -1,44 +1,51 @@
-{% extends 'auth/base.html' %}
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Masonite Forum</title>
+        <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1, user-scalable=no"
+        />
 
-{% block content %}
-<div class="row my-5">
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                {% if session().has('error') %}
-                <div class="alert alert-danger" role="alert">
-                    {{ session().get('error') }}
-                </div>
-                {% endif %}
-                {% if session().has('success') %}
-                <div class="alert alert-success" role="alert">
-                    {{ session().get('success') }}
-                </div>
-                {% endif %}
-                <div class="card rounded-1">
-                    <div class="card-header">
-                        <h5 class="mb-0">Password Reset</h5>
-                    </div>
-                    <div class="card-body">
-                        <form class="form" action="/password" method="POST">
-                            {{ csrf_field }}
-                            <div class="form-group">
-                                <label for="">Email</label>
-                                <input type="text" class="form-control form-control-md rounded-0" name="email">
-                                {% if session().has('errors') %}
-                                    {% for error in session().get('errors').get('email').items() %}
-                                    <div class="alert alert-danger" role="alert">
-                                        {{ error }}
-                                    </div>
-                                    {% endfor %}
-                                {% endif %}
+        <style>
+        :root {
+            --color-primary: #625dc9;
+            --color-primary-hover: #5651b9;
+        }
+        </style>
+        <link rel="stylesheet" href="/css/application.css">
+    </head>
+    <body>
+        <div class="flex h-screen overflow-hidden bg-body" >
+            <div class="flex flex-1 w-full pt-16">
+                <div class="flex-1 overflow-auto">
+                    <main class="py-6 sm:py-10">
+                        <div class="mx-auto max-w-7xl sm:px-6 lg:px-8">
+                            <div class='my-8 text-center'>
+                                <a class="inline-block text-primary hover:text-primary-hover" href="/">logo</a>
                             </div>
-                            <button type="submit" class="btn btn-success btn-md float-right">Send reset link</button>
-                        </form>
-                    </div>
+                            <div class="w-full max-w-md mx-auto">
+                                <h1 class="mb-6 text-center h3">Password recovery</h1>
+                                <form class="form" action="/password" method="POST">
+                                    {{ csrf_field }}
+                                    <div class="overflow-hidden  bg-white shadow sm:rounded-lg" >
+                                        <div class="px-4 py-5 sm:p-6">
+                                            <div class="form-field">
+                                                <label class="form-label block mb-1" for="email">Email</label>
+                                                <input autofocus="autofocus" autocomplete="email" class="form-input block w-full" type="email" value="{{ old('email') }}" name="email" id="email" />
+                                                <span class="form-error"></span>
+                                            </div>
+                                            <div class="mt-6">
+                                                <input type="submit" name="commit" value="Send instructions" class="btn btn:primary w-full justify-center" data-disable-with="Send instructions" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </main>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-{% endblock %}
+    </body>
+</html>
