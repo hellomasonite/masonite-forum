@@ -21,26 +21,27 @@
         <a class="text-primary hover:text-primary-hover" href="{{ route('home') }}">logo</a>
         <div>
           <span class="inline-flex">
-            <a
-              class="btn btn:sm text-primary bg-transparent rounded-full border-primary hover:text-white hover:bg-primary-hover focus:border-primary-hover focus:shadow-outline-indigo active:bg-primary-hover"
-              href="{{ route('login') }}"
-            >
-              Log in
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="2"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                class="feather feather-chevron-right w-4 h-4 ml-0.5 -mr-1"
-              >
-                <polyline points="9 18 15 12 9 6"></polyline>
-              </svg>
-            </a>
+            {% if not auth() %}
+              <a class="btn btn:sm text-primary bg-transparent rounded-full border-primary hover:text-white hover:bg-primary-hover focus:border-primary-hover focus:shadow-outline-indigo active:bg-primary-hover"
+                href="{{ route('login') }}">
+                Log in
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="feather feather-chevron-right w-4 h-4 ml-0.5 -mr-1">
+                  <polyline points="9 18 15 12 9 6"></polyline>
+                </svg>
+              </a>
+            {% else %}
+              <a class="btn btn:primary btn:sm" href="{{ route('questions.index') }}">Go to forum</a>
+            {% endif %}
           </span>
         </div>
       </header>

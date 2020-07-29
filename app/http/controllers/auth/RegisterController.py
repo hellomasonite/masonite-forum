@@ -1,9 +1,11 @@
 """The RegisterController Module."""
-
+from masonite import Queue
 from masonite.auth import Auth, MustVerifyEmail
 from masonite.managers import MailManager
 from masonite.request import Request
 from masonite.view import View
+
+from app.jobs.SendEmailConfirmation import SendEmailConfirmation
 from app.rules.auth.RegisterRequest import RegisterRequest
 
 
@@ -17,7 +19,7 @@ class RegisterController:
     def show(self, view: View):
         return view.render('auth/register')
 
-    def store(self, request: Request, mail_manager: MailManager, auth: Auth):
+    def store(self, request: Request, mail_manager: MailManager, auth: Auth, queue: Queue):
         errors = request.validate(RegisterRequest)
 
         if errors:
@@ -30,7 +32,8 @@ class RegisterController:
         })
 
         if isinstance(user, MustVerifyEmail):
-            user.verify_email(mail_manager, request)
+            queue.push(SendEmailConfirmation)
+            #user.verify_email(mail_manager, request)
 
         # Login the user
         if auth.login(request.input('email'), request.input('password')):
