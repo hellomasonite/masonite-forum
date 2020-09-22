@@ -16,3 +16,13 @@
   </h3>
 </div>
 
+# Installation
+
+1. Clone this repository with git clone git@github.com:hellomasonite/masonite-forum.git
+2. `virtualenv -p python3.6 venv`
+3. `source venv/bin/activate`
+4. `pip install -r requirements.txt`
+5. `cp .env-example .env`
+6. Setup a local database called `masoniteforum`
+7. Setup a working e-mail driver like Mailtrap
+8. `craft serve`
