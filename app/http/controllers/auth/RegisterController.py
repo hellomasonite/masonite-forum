@@ -31,10 +31,10 @@ class RegisterController:
             'email': request.input('email'),
         })
 
-        if isinstance(user, MustVerifyEmail):
-            queue.push(SendEmailConfirmation)
-            #user.verify_email(mail_manager, request)
+        queue.push(SendEmailConfirmation)
 
+        # TODO
+        # Going to a coming verification page
         # Login the user
         if auth.login(request.input('email'), request.input('password')):
             # Redirect to the homepage

@@ -1,4 +1,4 @@
-"""A SendEmailConfirmationJob Queue Job."""
+"""A SendEmailConfirmation Queue Job."""
 import time
 from masonite import Mail
 from masonite.auth import Sign
@@ -16,17 +16,17 @@ class SendEmailConfirmation(Queueable):
 
     def handle(self):
         """Logic to handle the job."""
-        print('job executed...')
-        sign = Sign()
+        self.mail.driver('smtp').to('nioperas06@gmail.com').send('test')
+        # sign = Sign()
 
-        token = sign.sign("{0}::{1}".format(self.id, time.time()))
-        link = "{0}/email/verify/{1}".format(self.request.environ["HTTP_HOST"], token)
+        # token = sign.sign("{0}::{1}".format(self.id, time.time()))
+        # link = "{0}/email/verify/{1}".format(self.request.environ["HTTP_HOST"], token)
 
-        self.mail.driver('smtp')\
-            .to(self.request.user().email, {
-                "name": self.request.user().name,
-                "email": self.request.user().email,
-                "link": link
-            })\
-            .template('mail/verifymail')\
-            .send()
+        # self.mail.driver('smtp')\
+        #     .to(self.request.user().email, {
+        #         "name": self.request.user().name,
+        #         "email": self.request.user().email,
+        #         "link": link
+        #     })\
+        #     .template('auth/verifymail')\
+        #     .send()

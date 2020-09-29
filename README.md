@@ -25,4 +25,5 @@
 5. `cp .env-example .env`
 6. Setup a local database called `masoniteforum`
 7. Setup a working e-mail driver like Mailtrap
-8. `craft serve`
+8. `craft migrate`
+9. `craft serve`
