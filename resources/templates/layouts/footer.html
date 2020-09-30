@@ -1,4 +1,39 @@
-<footer class="footer">
-    <p>Website built for <a href="#">Masonite Community</a> by <a
-            href="https://twitter.com/hellomasonite">@HelloMasonite</a>.</p>
+<footer class="bg-cool-gray-900">
+  <div class="max-w-4xl px-6 py-12 mx-auto lg:py-16">
+    <div class="flex-row-reverse sm:flex">
+      <div class="grid grid-cols-2 gap-10">
+        <div>
+          <h4
+            class="text-sm font-semibold leading-5 tracking-wider uppercase text-cool-gray-400"
+          >
+            Links
+          </h4>
+          <ul class="mt-4">
+            <li>
+              <a
+                class="block text-base leading-6 text-gray-300 hover:text-white"
+                href="https://github.com/hellomasonite/masonite-forum"
+                >GitHub</a
+              >
+            </li>
+            <li class="mt-4">
+              <a
+                class="text-base leading-6 text-gray-300 hover:text-white"
+                href="https://www.hellomasonite.com/"
+                >@HelloMasonite</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="flex-1 mt-12 sm:mr-10 sm:mt-0">
+        <a class="text-gray-300 hover:text-white" href="{{ route('home') }}"
+          >logo</a
+        >
+        <div class="mt-4 text-sm text-gray-400">
+          Copyright &copy;2020 Masonite Forum. All rights reserved.
+        </div>
+      </div>
+    </div>
+  </div>
 </footer>

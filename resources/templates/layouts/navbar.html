@@ -1,11 +1,30 @@
-<div
-  class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm"
->
-  <h5 class="my-0 mr-md-auto font-weight-normal">Masonite Forum</h5>
-  <nav class="my-2 my-md-0 mr-md-3">
-    <a class="p-2 text-dark" href="#">Events</a>
-    <a class="p-2 text-dark" href="#">More</a>
-  </nav>
-  <a class="btn btn-primary" href="{{ route('register') }}">Sign up</a>
-  <a class="btn btn-light ml-2" href="{{ route('login') }}">Login</a>
+<div class="max-w-4xl p-6 mx-auto sm:py-10">
+  <header class="flex items-center justify-between">
+    <a class="text-primary hover:text-primary-hover" href="{{ route('home') }}">logo</a>
+    <div>
+      <span class="inline-flex">
+        {% if not auth() %}
+          <a class="btn btn:sm text-primary bg-transparent rounded-full border-primary hover:text-white hover:bg-primary-hover focus:border-primary-hover focus:shadow-outline-indigo active:bg-primary-hover"
+            href="{{ route('login') }}">
+            Log in
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="feather feather-chevron-right w-4 h-4 ml-0.5 -mr-1">
+              <polyline points="9 18 15 12 9 6"></polyline>
+            </svg>
+          </a>
+        {% else %}
+          <a class="btn btn:primary btn:sm" href="{{ route('questions.index') }}">Go to forum</a>
+        {% endif %}
+      </span>
+    </div>
+  </header>
 </div>

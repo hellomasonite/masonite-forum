@@ -1,124 +1,34 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Masonite Forum</title>
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, user-scalable=no"
-    />
+{% extends "layouts/base.html" %}
 
-    <style>
-      :root {
-        --color-primary: #625dc9;
-        --color-primary-hover: #5651b9;
-      }
-    </style>
-    <link rel="stylesheet" href="/css/application.css">
-  </head>
-  <body>
-    <div class="max-w-4xl p-6 mx-auto sm:py-10">
-      <header class="flex items-center justify-between">
-        <a class="text-primary hover:text-primary-hover" href="{{ route('home') }}">logo</a>
-        <div>
-          <span class="inline-flex">
-            {% if not auth() %}
-              <a class="btn btn:sm text-primary bg-transparent rounded-full border-primary hover:text-white hover:bg-primary-hover focus:border-primary-hover focus:shadow-outline-indigo active:bg-primary-hover"
-                href="{{ route('login') }}">
-                Log in
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  width="24"
-                  height="24"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  class="feather feather-chevron-right w-4 h-4 ml-0.5 -mr-1">
-                  <polyline points="9 18 15 12 9 6"></polyline>
-                </svg>
-              </a>
-            {% else %}
-              <a class="btn btn:primary btn:sm" href="{{ route('questions.index') }}">Go to forum</a>
-            {% endif %}
-          </span>
-        </div>
-      </header>
-
-      <div class="mt-20 text-center">
-        <h2
-          class="text-5xl font-extrabold leading-none tracking-tight text-gray-900 sm:text-6xl"
-        >
-          The Masonite Forum
-          <br class="hidden sm:block" />
-          <span class="text-primary">for problem solving.</span>
-        </h2>
-        <p
-          class="mt-6 text-base leading-6 text-gray-600 sm:leading-7 sm:text-lg md:mt-8"
-        >
-          Join <strong class="font-semibold">35,538+</strong> web developers
-          learning <strong class="font-semibold">Masonite Framework</strong> to
-          build their ideas, products, and businesses.
-        </p>
-        <div class="mt-10 md:mt-12">
-          <div class="rounded-md shadow sm:inline-flex">
-            <a
-              class="btn btn:primary btn:lg w-full justify-center sm:w-auto"
-              href="{{ route('register') }}"
-              >Join the community</a
-            >
-          </div>
-          <div class="mt-3 rounded-md sm:inline-flex sm:mt-0 sm:ml-2">
-            <a
-              class="btn btn:secondary btn:lg w-full justify-center sm:w-auto"
-              href="{{ route('questions.index') }}"
-              >Visit the forum</a
-            >
-          </div>
-        </div>
+{% block content %}
+  <div class="mt-20 text-center">
+    <h2 class="text-5xl font-extrabold leading-none tracking-tight text-gray-900 sm:text-6xl">
+      The Masonite Forum
+      <br class="hidden sm:block" />
+      <span class="text-primary">for problem solving.</span>
+    </h2>
+    <p class="mt-6 text-base leading-6 text-gray-600 sm:leading-7 sm:text-lg md:mt-8">
+      Join <strong class="font-semibold">35,538+</strong> web developers learning
+      <strong class="font-semibold">Masonite Framework</strong> to build their
+      ideas, products, and businesses.
+    </p>
+    <div class="mt-10 md:mt-12">
+      <div class="rounded-md shadow sm:inline-flex">
+        <a
+          class="btn btn:primary btn:lg w-full justify-center sm:w-auto"
+          href="{{ route('register') }}">
+          Join the community
+          </a>
+      </div>
+      <div class="mt-3 rounded-md sm:inline-flex sm:mt-0 sm:ml-2">
+        <a
+          class="btn btn:secondary btn:lg w-full justify-center sm:w-auto"
+          href="{{ route('questions.index') }}">
+          Visit the forum
+        </a>
       </div>
     </div>
+  </div>
+  <div style="height: 100px;"></div>
+{% endblock %}
 
-    <!-- Remove this with appropriate padding -->
-    <br><br><br><br><br><br><br>
-
-    <footer class="bg-cool-gray-900">
-      <div class="max-w-4xl px-6 py-12 mx-auto lg:py-16">
-        <div class="flex-row-reverse sm:flex">
-          <div class="grid grid-cols-2 gap-10">
-            <div>
-              <h4
-                class="text-sm font-semibold leading-5 tracking-wider uppercase text-cool-gray-400"
-              >
-                Links
-              </h4>
-              <ul class="mt-4">
-                <li>
-                  <a
-                    class="block text-base leading-6 text-gray-300 hover:text-white"
-                    href="https://github.com/hellomasonite/masonite-forum"
-                    >GitHub</a
-                  >
-                </li>
-                <li class="mt-4">
-                  <a
-                    class="text-base leading-6 text-gray-300 hover:text-white"
-                    href="https://www.hellomasonite.com/"
-                    >@HelloMasonite</a
-                  >
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="flex-1 mt-12 sm:mr-10 sm:mt-0">
-            <a class="text-gray-300 hover:text-white" href="{{ route('home') }}">logo</a>
-            <div class="mt-4 text-sm text-gray-400">
-              Copyright &copy;2020 Masonite Forum. All rights reserved.
-            </div>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </body>
-</html>

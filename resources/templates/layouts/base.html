@@ -1,47 +1,26 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Masonite Forum {% block title %}{% endblock %}</title>
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, user-scalable=no"
+    />
 
-<head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <meta name="csrf-token" content="{{ csrf_token }}">
-
-    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.x.x/dist/alpine.min.js" defer></script>
-    <script src="/js/app.js" defer></script>
-    <link rel="stylesheet" href="/css/app.css">
-
-    <title>Masonite Forum</title>
-</head>
-
-<body>
-
+    <style>
+      :root {
+        --color-primary: #625dc9;
+        --color-primary-hover: #5651b9;
+      }
+    </style>
+    <link rel="stylesheet" href="/css/application.css" />
+  </head>
+  <body>
     <div id="app">
-
-        {% include 'layouts/navbar.html' %}
-
-        {% block content %}{% endblock %}
-
-        {% include 'layouts/footer.html' %}
-
+      {% include 'layouts/navbar.html' %}
+      {% include 'alerts/email_confirmation.html' %}
+      {% block content %}{% endblock %}
+      {% include 'layouts/footer.html' %}
     </div>
-
-
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-        crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-        crossorigin="anonymous"></script>
-</body>
-
+  </body>
 </html>
