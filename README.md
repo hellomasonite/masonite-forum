@@ -27,3 +27,4 @@
 7. Setup a working e-mail driver like Mailtrap
 8. `craft migrate`
 9. `craft serve`
+10. Run `craft queue:work`

@@ -1,7 +1,9 @@
 """ A RegisterRequest validation enclosure """
 
+from app.User import User
+from app.rules.unique import unique
 from masonite.validation import RuleEnclosure
-from masonite.validation import required, email, numeric, length
+from masonite.validation import required, email, numeric, length, isnt, is_in
 
 
 class RegisterRequest(RuleEnclosure):
@@ -18,6 +20,6 @@ class RegisterRequest(RuleEnclosure):
         return [
             required(['name', 'email', 'password']),
             email('email'),
-            # TODO
+            unique('email'),
             length('password', min=6)
         ]

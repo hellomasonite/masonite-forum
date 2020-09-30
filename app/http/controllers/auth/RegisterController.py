@@ -31,10 +31,8 @@ class RegisterController:
             'email': request.input('email'),
         })
 
-        queue.push(SendEmailConfirmation)
+        queue.push(SendEmailConfirmation, args=[user])
 
-        # TODO
-        # Going to a coming verification page
         # Login the user
         if auth.login(request.input('email'), request.input('password')):
             # Redirect to the homepage

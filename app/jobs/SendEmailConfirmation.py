@@ -1,32 +1,29 @@
 """A SendEmailConfirmation Queue Job."""
-import time
+import time, os
 from masonite import Mail
 from masonite.auth import Sign
 from masonite.queues import Queueable
 from masonite.request import Request
+from masonite import env
 
 
 class SendEmailConfirmation(Queueable):
     """A SendEmailConfirmation Job."""
 
-    def __init__(self, request: Request, mail: Mail):
+    def __init__(self, mail: Mail):
         """A SendEmailConfirmation Constructor."""
-        self.request = request
         self.mail = mail
 
-    def handle(self):
+    def handle(self, user):
         """Logic to handle the job."""
-        self.mail.driver('smtp').to('nioperas06@gmail.com').send('test')
-        # sign = Sign()
+        token = Sign().sign("{0}::{1}".format(user.id, time.time()))
+        link = "{0}/email/verify/{1}".format(env('APP_URL'), token)
 
-        # token = sign.sign("{0}::{1}".format(self.id, time.time()))
-        # link = "{0}/email/verify/{1}".format(self.request.environ["HTTP_HOST"], token)
-
-        # self.mail.driver('smtp')\
-        #     .to(self.request.user().email, {
-        #         "name": self.request.user().name,
-        #         "email": self.request.user().email,
-        #         "link": link
-        #     })\
-        #     .template('auth/verifymail')\
-        #     .send()
+        self.mail.driver('smtp').subject('Welcome To Masonite Forum')\
+            .to(user.email)\
+            .template('emails/email_confirmation.html', {
+                "name": user.name,
+                "email": user.email,
+                "link": link
+            })\
+            .send()
