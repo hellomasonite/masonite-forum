@@ -18,6 +18,7 @@ class SendEmailConfirmation(Queueable):
         """Logic to handle the job."""
         token = Sign().sign("{0}::{1}".format(user.id, time.time()))
         link = "{0}/email/verify/{1}".format(env('APP_URL'), token)
+        print(env('APP_URL'), link)
 
         self.mail.driver('smtp').subject('Welcome To Masonite Forum')\
             .to(user.email)\
