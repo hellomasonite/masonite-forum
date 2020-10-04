@@ -41,8 +41,10 @@ class PasswordController:
                 user.save()
             message = 'Please visit {}/password/{}/reset to reset your password'.format(env('SITE', 'http://localhost:8000'), user.remember_token)
             mail.subject('Reset Password Instructions').to(user.email).send(message)
+            session.flash('success', 'We have e-mailed your password reset link!')
+        else:
+            session.flash('error', "We can't find a user with that e-mail address.")
 
-        session.flash('success', 'If we found that email in our system then the email has been sent. Please follow the instructions in the email to reset your password.')
         return request.redirect('/password')
 
     def update(self, request: Request, validate: Validator):
