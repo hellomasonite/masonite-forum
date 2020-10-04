@@ -44,4 +44,4 @@ class LoginController:
             masonite.request.Request -- The Masonite request class.
         """
         auth.logout()
-        return request.redirect('/login')
+        return request.redirect('/')

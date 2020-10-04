@@ -16,7 +16,10 @@ class SocialAuthController(Controller):
 
     def callback(self, request: Request, socialite: Socialite):
         user = socialite.driver('github').user()
-
         dd(user)
+        # try:
+
+        # except:
+        #     return request.redirect('/login')
 
         return request.redirect('/')
